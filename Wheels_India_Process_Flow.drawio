@@ -1,413 +1,354 @@
 <mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
-  <diagram id="wheels-india-flow" name="Wheels India — Salesforce Process Flow">
-    <mxGraphModel dx="3400" dy="2200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3600" pageHeight="2400" math="0" shadow="0">
+  <diagram id="wheels-india-swimlane" name="Wheels India — Salesforce ↔ SAP Process Flow">
+    <mxGraphModel dx="3400" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3500" pageHeight="1300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <!-- TITLE -->
-        <mxCell id="title" value="Wheels India — Salesforce Business Process Flow (Scope: Sep 25, 2026)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontStyle=1;fontColor=#1F3864;" vertex="1" parent="1">
-          <mxGeometry x="40" y="20" width="3520" height="40" as="geometry" />
+        <!-- ============================= TITLE + LEGEND ============================= -->
+        <mxCell id="title" value="Wheels India — Business Process Flow: Salesforce ↔ SAP (derived from Sep 25/29 scope discussions)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;fontColor=#1F3864;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="3420" height="34" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Numbers in brackets are BRN references from the scope sheet · dashed arrows = data / cross-cutting links · diamond with + = parallel gateway" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=2;fontColor=#595959;" vertex="1" parent="1">
-          <mxGeometry x="40" y="60" width="3520" height="24" as="geometry" />
-        </mxCell>
-
-        <!-- POOL -->
-        <mxCell id="pool" value="Wheels India Sales &amp; NPD Process (Salesforce)" style="shape=swimlane;html=1;startSize=32;horizontal=0;fontSize=15;fontStyle=1;fillColor=#F5F5F5;strokeColor=#666666;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="40" y="100" width="3520" height="2200" as="geometry" />
+        <mxCell id="subtitle" value="Hexagons in the Integration lane = API sync points between Salesforce and SAP · dashed arrows = data flow · diamonds = decisions" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=2;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="40" y="46" width="3420" height="22" as="geometry" />
         </mxCell>
 
-        <!-- LANES: taller and wider for breathing room -->
-        <mxCell id="lane_lead" value="Lead&#10;Management&#10;(1.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="0" width="3488" height="240" as="geometry" />
+        <!-- ============================= PHASE HEADERS ============================= -->
+        <mxCell id="ph1" value="1. Lead Capture &amp; Conversion" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="76" width="500" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_acct" value="Account &amp;&#10;Contact&#10;(2.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#D5E8D4;strokeColor=#82B366;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="240" width="3488" height="220" as="geometry" />
+        <mxCell id="ph2" value="2. RFQ + NPD Engineering (BOM)" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="76" width="500" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_opp" value="Opportunity&#10;/ RFQ&#10;(3.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#FFF2CC;strokeColor=#D6B656;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="460" width="3488" height="240" as="geometry" />
+        <mxCell id="ph3" value="3. Parallel — Make vs Buy" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="76" width="440" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_npd" value="NPD&#10;Workflow&#10;(4.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#F8CECC;strokeColor=#B85450;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="700" width="3488" height="320" as="geometry" />
+        <mxCell id="ph4" value="4. Packing → Tooling → Costing" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="76" width="500" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_prod" value="Product Catalogue&#10;&amp; Pricing&#10;(5.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#E1D5E7;strokeColor=#9673A6;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="1020" width="3488" height="220" as="geometry" />
+        <mxCell id="ph5" value="5. Quotation" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="76" width="360" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_quote" value="Quotation&#10;(6.x)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#FFE6CC;strokeColor=#D79B00;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="1240" width="3488" height="240" as="geometry" />
+        <mxCell id="ph6" value="6. PO Reception → SAP Sales Order" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="2580" y="76" width="360" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lane_int" value="Product MDM,&#10;Activity, Reports,&#10;Security (7–10)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#B0E3E6;strokeColor=#0E8088;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="1480" width="3488" height="360" as="geometry" />
-        </mxCell>
-        <mxCell id="lane_found" value="Data Migration &amp;&#10;Core Org Config&#10;(11.x, 12.1)" style="shape=swimlane;html=1;horizontal=0;startSize=110;fontSize=13;fontStyle=1;fillColor=#E8E8E8;strokeColor=#666666;swimlaneFillColor=#FFFFFF;" vertex="1" parent="pool">
-          <mxGeometry x="32" y="1840" width="3488" height="220" as="geometry" />
+        <mxCell id="ph7" value="7. Invoice · GRN · Collection" style="text;html=1;fillColor=#EEF3FB;strokeColor=#6C8EBF;align=center;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1F3864;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="2960" y="76" width="500" height="26" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- LEAD LANE  (y within lane: shapes centered around ~90)            -->
-        <!-- Column layout (parent=lane, coords are lane-relative):            -->
-        <!--   start        140  y=80  w=100 h=60                              -->
-        <!--   lead_src     280  y=50  w=240 h=120                             -->
-        <!--   lead_create  580  y=70  w=200 h=80                              -->
-        <!--   lead_dedup   840  y=55  w=180 h=110 (diamond)                   -->
-        <!--   lead_assign 1080  y=70  w=210 h=80                              -->
-        <!--   lead_qual   1350  y=70  w=220 h=80                              -->
-        <!-- ================================================================ -->
-
-        <mxCell id="start" value="Inquiry&#10;received" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1F3864;strokeColor=#0B1A38;fontColor=#FFFFFF;fontStyle=1;fontSize=13;" vertex="1" parent="lane_lead">
-          <mxGeometry x="140" y="80" width="100" height="60" as="geometry" />
+        <!-- ============================= LANE BACKGROUNDS ============================= -->
+        <mxCell id="lane1_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fillOpacity=40;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="110" width="3440" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="lane1_hd" value="CUSTOMER" style="text;html=1;strokeColor=none;fillColor=#6C8EBF;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="110" width="160" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_src" value="Lead sources&#10;• Web-to-Lead form&#10;• Email-to-Lead (shared inbox)&#10;• BD outreach (manual)&#10;• Referrals" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;align=left;spacingLeft=12;" vertex="1" parent="lane_lead">
-          <mxGeometry x="280" y="50" width="240" height="120" as="geometry" />
+        <mxCell id="lane2_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fillOpacity=35;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="3440" height="540" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2_hd" value="SALESFORCE" style="text;html=1;strokeColor=none;fillColor=#82B366;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="160" height="540" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_create" value="Lead Capture&#10;&amp; Creation&#10;(1.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=13;fontStyle=1;" vertex="1" parent="lane_lead">
-          <mxGeometry x="580" y="70" width="200" height="80" as="geometry" />
+        <mxCell id="lane3_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fillOpacity=40;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="760" width="3440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="lane3_hd" value="INTEGRATION&#10;(API / Middleware)" style="text;html=1;strokeColor=none;fillColor=#0E8088;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="760" width="160" height="140" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_dedup" value="Lead&#10;Deduplication&#10;(1.3)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontStyle=1;" vertex="1" parent="lane_lead">
-          <mxGeometry x="840" y="55" width="180" height="110" as="geometry" />
+        <mxCell id="lane4_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fillOpacity=40;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="900" width="3440" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="lane4_hd" value="SAP&#10;(ERP)" style="text;html=1;strokeColor=none;fillColor=#D79B00;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="900" width="160" height="280" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_assign" value="Lead Assignment&#10;&amp; Routing&#10;(1.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=13;fontStyle=1;" vertex="1" parent="lane_lead">
-          <mxGeometry x="1080" y="70" width="210" height="80" as="geometry" />
+        <!-- ============================= PHASE 1 SHAPES ============================= -->
+        <mxCell id="p1_cust" value="Customer inquiry received&#10;(web form · shared inbox · BDM outreach · referral)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="130" width="480" height="70" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_qual" value="Lead Qualification&#10;&amp; Conversion&#10;(1.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=13;fontStyle=1;" vertex="1" parent="lane_lead">
-          <mxGeometry x="1350" y="70" width="220" height="80" as="geometry" />
+        <mxCell id="p1_lead" value="Lead created in Salesforce&#10;(Web-to-Lead OR Email-to-Lead)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="240" width="240" height="70" as="geometry" />
         </mxCell>
 
-        <mxCell id="lead_note" value="Converts to&#10;Account · Contact · Opportunity" style="text;html=1;strokeColor=none;fillColor=none;align=center;whiteSpace=wrap;fontSize=11;fontStyle=2;fontColor=#595959;" vertex="1" parent="lane_lead">
-          <mxGeometry x="1630" y="80" width="230" height="60" as="geometry" />
+        <mxCell id="p1_qual" value="Qualify Lead&#10;New → Contacted → Qualified&#10;(sales rep tags product interest)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="345" width="240" height="80" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- ACCOUNT LANE — column aligned with lead_qual (x≈1350)             -->
-        <!-- ================================================================ -->
-        <mxCell id="acct_create" value="Account Creation&#10;&amp; Hierarchy&#10;(2.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=13;fontStyle=1;" vertex="1" parent="lane_acct">
-          <mxGeometry x="1350" y="60" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="acct_dedup" value="Account &amp; Contact&#10;Deduplication&#10;(2.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=13;fontStyle=1;" vertex="1" parent="lane_acct">
-          <mxGeometry x="1650" y="60" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="acct_360" value="Account 360&#10;View&#10;(2.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=13;fontStyle=1;" vertex="1" parent="lane_acct">
-          <mxGeometry x="1950" y="60" width="200" height="80" as="geometry" />
+        <mxCell id="p1_conv" value="Convert Lead&#10;→ creates Account + Contact + RFQ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="460" width="240" height="70" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- OPPORTUNITY LANE                                                  -->
-        <!-- ================================================================ -->
-        <mxCell id="opp_create" value="Opportunity Creation&#10;&amp; Lifecycle&#10;(3.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=13;fontStyle=1;" vertex="1" parent="lane_opp">
-          <mxGeometry x="200" y="80" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="opp_rfq" value="RFQ &amp; Product&#10;Line-Item Tracking&#10;(3.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=13;fontStyle=1;" vertex="1" parent="lane_opp">
-          <mxGeometry x="500" y="80" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="opp_pipe" value="Pipeline Visibility&#10;&amp; Opp Tracking&#10;(3.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=13;fontStyle=1;" vertex="1" parent="lane_opp">
-          <mxGeometry x="800" y="80" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="opp_act" value="Opportunity&#10;Activity Tracking&#10;(3.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=13;fontStyle=1;" vertex="1" parent="lane_opp">
-          <mxGeometry x="1100" y="80" width="220" height="80" as="geometry" />
+        <mxCell id="p1_note" value="Account holds hierarchy: Parent → Region → Plant.&#10;Multiple contacts per account (buyers, SDE, quality per plant)." style="text;html=1;strokeColor=#82B366;fillColor=#FBFEFB;align=center;whiteSpace=wrap;fontSize=11;fontStyle=2;fontColor=#3A6B3A;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="565" width="480" height="60" as="geometry" />
         </mxCell>
 
-        <mxCell id="opp_gate" value="Requires&#10;NPD?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=13;fontStyle=1;" vertex="1" parent="lane_opp">
-          <mxGeometry x="1390" y="70" width="170" height="110" as="geometry" />
+        <mxCell id="p1_360" value="Account 360 view&#10;(pipeline · quotes · NPDs · part-level revenue history)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5FBF5;strokeColor=#82B366;fontSize=11;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="655" width="480" height="80" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- NPD LANE (deeper, uses parallel gateways)                         -->
-        <!-- ================================================================ -->
-        <mxCell id="npd_init" value="NPD Initiation&#10;&amp; Engineering&#10;(4.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="200" y="120" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="npd_bom" value="Component Line-Item&#10;Entry &amp; BOM&#10;Coordination (4.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="490" y="120" width="240" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="npd_proc" value="Procurement&#10;Cost-Fill Stage&#10;(4.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="800" y="120" width="220" height="80" as="geometry" />
+        <!-- ============================= PHASE 2 SHAPES ============================= -->
+        <mxCell id="p2_rfq" value="RFQ / Opportunity created&#10;(part# · qty · dimensions · line items)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="240" width="280" height="70" as="geometry" />
         </mxCell>
 
-        <mxCell id="npd_split" value="+" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#B85450;fontSize=22;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1080" y="130" width="60" height="60" as="geometry" />
+        <mxCell id="p2_dec" value="NPD required?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="335" width="180" height="90" as="geometry" />
         </mxCell>
 
-        <mxCell id="npd_mfg" value="Manufacturing Stage&#10;(parallel)&#10;(4.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1200" y="50" width="240" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="npd_par2" value="Parallel review&#10;&amp; cost roll-up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=2;dashed=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1200" y="190" width="240" height="80" as="geometry" />
+        <mxCell id="p2_eng" value="Engineering — Create BOM&#10;• enter part serial numbers&#10;• tag Make-or-Buy per line&#10;• attach CAD (WinChip link or PDF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="450" width="280" height="120" as="geometry" />
         </mxCell>
 
-        <mxCell id="npd_join" value="+" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#B85450;fontSize=22;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1500" y="130" width="60" height="60" as="geometry" />
+        <!-- Integration hex 1: product master sync -->
+        <mxCell id="int1" value="API — Product Master Sync&#10;(existing part price + spec)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="790" width="280" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="npd_appr" value="NPD Approvals&#10;&amp; Notifications&#10;(4.5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1620" y="120" width="220" height="80" as="geometry" />
+        <mxCell id="sap_pm" value="Product Master&#10;(existing part codes · prices · specs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="930" width="280" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="npd_dec" value="Approved?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=13;fontStyle=1;" vertex="1" parent="lane_npd">
-          <mxGeometry x="1900" y="115" width="170" height="90" as="geometry" />
+        <!-- ============================= PHASE 3 SHAPES ============================= -->
+        <!-- Parallel split at top center of phase 3 -->
+        <mxCell id="p3_split" value="+" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#82B366;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="490" width="50" height="50" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- PRODUCT & PRICING LANE                                            -->
-        <!-- ================================================================ -->
-        <mxCell id="prod_master" value="Product Master&#10;&amp; Variants&#10;(5.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=13;fontStyle=1;" vertex="1" parent="lane_prod">
-          <mxGeometry x="200" y="60" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="prod_index" value="Index-Based&#10;Pricing Logic&#10;(5.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=13;fontStyle=1;" vertex="1" parent="lane_prod">
-          <mxGeometry x="500" y="60" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="prod_book" value="Price Book Admin&#10;&amp; Revision Mgmt&#10;(5.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=13;fontStyle=1;" vertex="1" parent="lane_prod">
-          <mxGeometry x="800" y="60" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="prod_contract" value="Contract Pricing&#10;&amp; Expiry Alerts&#10;(5.4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=13;fontStyle=1;" vertex="1" parent="lane_prod">
-          <mxGeometry x="1110" y="60" width="230" height="80" as="geometry" />
+        <mxCell id="p3_proc" value="Procurement (Buy items)&#10;fill vendor + price for NEW parts&#10;(fields blank from SAP fetch)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="340" width="300" height="100" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- QUOTATION LANE                                                    -->
-        <!-- ================================================================ -->
-        <mxCell id="quote_create" value="Quote Creation&#10;&amp; Document Gen&#10;(6.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="200" y="80" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_dec" value="Discount&#10;within limit?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="500" y="70" width="180" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_appr" value="Discount Approval&#10;Workflow&#10;(6.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="750" y="80" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_send" value="Send quote&#10;to customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="1050" y="80" width="200" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_won" value="Won?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="1320" y="75" width="140" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_hand" value="Post-Quote&#10;Order Handoff&#10;(6.3) → ERP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D79B00;fontSize=13;fontStyle=1;" vertex="1" parent="lane_quote">
-          <mxGeometry x="1530" y="80" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="end" value="Order booked&#10;/ End" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1F7A1F;strokeColor=#0B4C0B;fontColor=#FFFFFF;fontStyle=1;fontSize=13;" vertex="1" parent="lane_quote">
-          <mxGeometry x="1830" y="90" width="130" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="quote_lost" value="Mark Closed-Lost&#10;(3.1 lifecycle)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=12;" vertex="1" parent="lane_quote">
-          <mxGeometry x="1300" y="15" width="180" height="50" as="geometry" />
+        <mxCell id="p3_mfg" value="Manufacturing (Make items)&#10;pick work centre + cycle time&#10;(activity rate auto-fetched)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="590" width="300" height="100" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- INTEGRATION LANE                                                  -->
-        <!-- Row A (y=40): MDM sync, MDM err, activity, email, reports         -->
-        <!-- Row B (y=170): security shapes                                    -->
-        <!-- Row C (y=280): explanation text                                   -->
-        <!-- ================================================================ -->
-        <mxCell id="mdm_sync" value="Product Master Data Sync&#10;(ERP ↔ Salesforce)&#10;(7.1)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="200" y="40" width="260" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="mdm_err" value="Integration Error&#10;Handling &amp; Alerts&#10;(7.2)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="520" y="40" width="240" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="act_log" value="Manual Activity&#10;Logging&#10;(8.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="820" y="45" width="200" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="email_log" value="Email Logging &amp;&#10;Activity Timeline&#10;(8.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="1080" y="45" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="reports" value="Reports &amp; Dashboards&#10;(9.1)&#10;Pipeline · NPD status · Quote conversion · RBAC-scoped" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="lane_int">
-          <mxGeometry x="1360" y="40" width="360" height="90" as="geometry" />
+        <mxCell id="p3_join" value="+" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#82B366;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1670" y="490" width="50" height="50" as="geometry" />
         </mxCell>
 
-        <mxCell id="sec_rbac" value="RBAC&#10;(10.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="200" y="170" width="140" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="sec_dev" value="Device &amp; Login&#10;Policy (10.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="380" y="170" width="180" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="sec_doc" value="Doc &amp; Data Download&#10;Controls (10.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=13;fontStyle=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="600" y="170" width="220" height="70" as="geometry" />
+        <!-- Integration hex 2: work centre + activity rates -->
+        <mxCell id="int2" value="API — Work Centre + Activity Rate&#10;sync (per manufactured part)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="790" width="300" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="int_note" value="Cross-cutting — applies to every module above.  Security &amp; RBAC gate every record view; Activity/Email logging attaches to Lead/Account/Opportunity/Quote timelines; Product MDM feeds the Product Catalogue &amp; Pricing lane; Reports read from all lanes." style="text;html=1;strokeColor=#0E8088;fillColor=#F5FBFB;align=center;whiteSpace=wrap;fontSize=12;fontStyle=2;fontColor=#0E8088;rounded=1;" vertex="1" parent="lane_int">
-          <mxGeometry x="200" y="280" width="3200" height="50" as="geometry" />
+        <mxCell id="sap_wc" value="Work Centre Master&#10;+ Activity Rates + Vendor Master" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="930" width="300" height="80" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- FOUNDATIONS LANE                                                  -->
-        <!-- ================================================================ -->
-        <mxCell id="mig_plan" value="Data Migration Planning&#10;&amp; Mapping (11.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=13;fontStyle=1;" vertex="1" parent="lane_found">
-          <mxGeometry x="200" y="50" width="260" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="mig_load" value="Historical&#10;Data Load (11.2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=13;fontStyle=1;" vertex="1" parent="lane_found">
-          <mxGeometry x="520" y="50" width="220" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="core_org" value="Core Org Configuration (12.1)&#10;Company profile · currencies · fiscal year · users · profiles · sharing rules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=12;fontStyle=1;" vertex="1" parent="lane_found">
-          <mxGeometry x="800" y="50" width="440" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="found_note" value="One-time foundational work executed before Go-Live; underpins every functional lane above." style="text;html=1;strokeColor=none;fillColor=none;align=left;whiteSpace=wrap;fontSize=12;fontStyle=2;fontColor=#595959;" vertex="1" parent="lane_found">
-          <mxGeometry x="1300" y="70" width="1000" height="40" as="geometry" />
+        <!-- ============================= PHASE 4 SHAPES ============================= -->
+        <mxCell id="p4_pack" value="Packing stage&#10;domestic vs export · box type · qty per box · packing cost" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="240" width="380" height="70" as="geometry" />
         </mxCell>
 
-        <!-- ================================================================ -->
-        <!-- EDGES — parent=pool, source/target refer to child IDs.            -->
-        <!-- Explicit exit/entry ports keep every arrow on a clean side.       -->
-        <!-- ================================================================ -->
+        <mxCell id="p4_tool" value="Tooling &amp; Gauges&#10;if applicable — one-time cost (amortisable)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="335" width="380" height="70" as="geometry" />
+        </mxCell>
 
-        <!-- Lead flow (all left-to-right, exit=1,0.5 entry=0,0.5) -->
-        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pool" source="start" target="lead_src"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pool" source="lead_src" target="lead_create"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pool" source="lead_create" target="lead_dedup"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e4" value="unique" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=11;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="lead_dedup" target="lead_assign"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="lead_assign" target="lead_qual"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p4_cost" value="Costing — consolidate&#10;material + manufacturing + packing + tooling + overheads&#10;→ derive FLOOR PRICE (minimum selling price)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="430" width="380" height="100" as="geometry" />
+        </mxCell>
 
-        <!-- duplicate branch: goes DOWN from lead_dedup bottom into acct_dedup top, using waypoints to avoid crossing lead_assign / lead_qual / acct_create -->
-        <mxCell id="e4b" value="duplicate → merge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=11;fontColor=#B85450;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pool" source="lead_dedup" target="acct_dedup">
+        <mxCell id="p4_appr" value="Costing Approval&#10;(sign-off before quote can be released)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="555" width="380" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_loop" value="Every 6 months: upload steel index → recalculate revised price per customer (VMI added for US &amp; Mexico) → auto-send to customer" style="text;html=1;strokeColor=#B85450;fillColor=#FDECEA;align=center;whiteSpace=wrap;fontSize=11;fontStyle=2;fontColor=#B85450;rounded=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="655" width="380" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============================= PHASE 5 SHAPES ============================= -->
+        <mxCell id="p5_quote" value="Quote created&#10;(Floor Price = threshold)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2220" y="240" width="320" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p5_dec" value="Below&#10;Floor Price?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2230" y="345" width="140" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p5_appr" value="Discount / Deviation&#10;Approval workflow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="360" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p5_send" value="Send Quote via Outlook&#10;PDF letterhead · no download · no e-signature" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2220" y="480" width="320" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============================= PHASE 6 SHAPES ============================= -->
+        <mxCell id="p6_po_cust" value="Customer issues&#10;Purchase Order" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2600" y="130" width="300" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p6_po_sf" value="PO recorded in Salesforce&#10;PO# · qty · delivery date · expiry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2600" y="240" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Integration hex 3: SO trigger to SAP -->
+        <mxCell id="int3" value="API — Trigger Sales Order&#10;(SF → SAP, PO# carries through)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2600" y="790" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sap_so" value="Sales Order created in SAP&#10;(validated: qty ≤ PO qty, date ≤ PO expiry)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2600" y="930" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============================= PHASE 7 SHAPES ============================= -->
+        <mxCell id="sap_inv" value="Invoice raised in SAP&#10;(against Sales Order)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2980" y="930" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sap_grn" value="GRN captured&#10;(auto via Catapult / manual)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="3220" y="930" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Integration hex 4: invoice + GRN fetch to SF -->
+        <mxCell id="int4" value="API — Invoice + GRN fetched&#10;(SAP → SF, per PO)" style="shape=hexagon;perimeter=hexagonPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2980" y="790" width="460" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p7_pay" value="Payment tracking&#10;30 / 60 / 90-day terms from GRN date&#10;(picklist set at Lead / Account level)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2980" y="240" width="460" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p7_coll" value="Collection alerts · overdue notifications&#10;three revenue milestones: PO received → Invoice raised → Payment collected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2980" y="355" width="460" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p7_end" value="Payment collected&#10;/ RFQ cycle closed" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1F7A1F;strokeColor=#0B4C0B;fontColor=#FFFFFF;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3160" y="475" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ============================= EDGES — CUSTOMER → SALESFORCE ============================= -->
+        <mxCell id="e_c1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p1_cust" target="p1_lead"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Phase 1 vertical Salesforce chain -->
+        <mxCell id="e_sf1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p1_lead" target="p1_qual"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sf2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p1_qual" target="p1_conv"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sf3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p1_conv" target="p1_note"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- P1 → P2 link (Convert → RFQ across phases) -->
+        <mxCell id="e_12" value="creates RFQ" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p1_conv" target="p2_rfq"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- P2 chain -->
+        <mxCell id="e_p2a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p2_rfq" target="p2_dec"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p2b" value="Yes (new product)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#B85450;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p2_dec" target="p2_eng"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- P2 "No — catalogue" long path to Quote (goes through a corridor above phases 3-4) -->
+        <mxCell id="e_p2_skip" value="No — catalogue item" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#0E8088;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p2_dec" target="p5_quote">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="962" y="220" />
-              <mxPoint x="500" y="220" />
-              <mxPoint x="500" y="340" />
-              <mxPoint x="1650" y="340" />
+              <mxPoint x="1080" y="380" />
+              <mxPoint x="1080" y="205" />
+              <mxPoint x="2180" y="205" />
+              <mxPoint x="2180" y="275" />
             </Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- Lead → Account (from lead_qual bottom down to acct_create top, same column x≈1460) -->
-        <mxCell id="e6" value="Convert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=12;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="lead_qual" target="acct_create"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- P2 Integration links: engineering ↔ SAP product master via int1 -->
+        <mxCell id="e_p2_int_up" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p2_eng" target="int1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p2_int_dn" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="int1" target="sap_pm"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Account flow -->
-        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="acct_create" target="acct_dedup"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="acct_dedup" target="acct_360"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- P2 → P3 -->
+        <mxCell id="e_23" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p2_eng" target="p3_split"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Account → Opportunity (from acct_360 bottom down and left to opp_create top-left) -->
-        <mxCell id="e9" value="Create Opportunity" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=12;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="acct_360" target="opp_create">
+        <!-- P3 split → procurement (up) and manufacturing (down) -->
+        <mxCell id="e_p3_up" value="Buy" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="p3_split" target="p3_proc"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p3_dn" value="Make" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="p3_split" target="p3_mfg"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Merge -->
+        <mxCell id="e_p3_up_m" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="p3_proc" target="p3_join"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p3_dn_m" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="p3_mfg" target="p3_join"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Integration link: manufacturing ↔ SAP work-centre via int2 -->
+        <mxCell id="e_p3_int_up" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p3_mfg" target="int2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p3_int_dn" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="int2" target="sap_wc"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- P3 → P4 -->
+        <mxCell id="e_34" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p3_join" target="p4_pack">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2082" y="420" />
-              <mxPoint x="347" y="420" />
+              <mxPoint x="1740" y="515" />
+              <mxPoint x="1740" y="275" />
             </Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- Opportunity flow -->
-        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="opp_create" target="opp_rfq"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="opp_rfq" target="opp_pipe"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="opp_pipe" target="opp_act"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="opp_act" target="opp_gate"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- P4 chain -->
+        <mxCell id="e_p4a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p4_pack" target="p4_tool"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p4b" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p4_tool" target="p4_cost"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p4c" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p4_cost" target="p4_appr"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Opp gate → NPD (down-left to npd_init top) -->
-        <mxCell id="e14" value="Yes (new product)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#B85450;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="opp_gate" target="npd_init">
+        <!-- 6-monthly revision loop -->
+        <mxCell id="e_loop" value="feeds back" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#B85450;strokeWidth=2;fontSize=10;dashed=1;fontColor=#B85450;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="p4_loop" target="p5_send">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1507" y="670" />
-              <mxPoint x="342" y="670" />
+              <mxPoint x="2170" y="695" />
+              <mxPoint x="2170" y="590" />
+              <mxPoint x="2380" y="590" />
             </Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- Opp gate → Quote (down-right to quote_create top) -->
-        <mxCell id="e15" value="No (catalogue item)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0E8088;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="opp_gate" target="quote_create">
+        <!-- P4 → P5 -->
+        <mxCell id="e_45" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p4_appr" target="p5_quote">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1900" y="585" />
-              <mxPoint x="1900" y="1200" />
-              <mxPoint x="347" y="1200" />
+              <mxPoint x="2180" y="590" />
+              <mxPoint x="2180" y="275" />
             </Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- NPD flow left to right -->
-        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_init" target="npd_bom"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_bom" target="npd_proc"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_proc" target="npd_split"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e19a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_split" target="npd_mfg"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e19b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_split" target="npd_par2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e20a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="pool" source="npd_mfg" target="npd_join"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e20b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="pool" source="npd_par2" target="npd_join"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_join" target="npd_appr"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="npd_appr" target="npd_dec"><mxGeometry relative="1" as="geometry"/></mxCell>
-
-        <!-- Approved yes → prod_master (down and left) -->
-        <mxCell id="e23" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0E8088;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="npd_dec" target="prod_master">
+        <!-- P5 chain -->
+        <mxCell id="e_p5a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p5_quote" target="p5_dec"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p5b" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#B85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p5_dec" target="p5_appr"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p5c" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#0E8088;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p5_dec" target="p5_send">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2017" y="990" />
-              <mxPoint x="342" y="990" />
+              <mxPoint x="2300" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_p5d" value="Approved" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#0E8088;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p5_appr" target="p5_send"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- P5 → P6 (send quote → PO received) -->
+        <mxCell id="e_56" value="customer accepts" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p5_send" target="p6_po_cust">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2570" y="520" />
+              <mxPoint x="2570" y="165" />
             </Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- Rework: npd_dec bottom → back to npd_bom -->
-        <mxCell id="e24" value="Rework" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#B85450;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="pool" source="npd_dec" target="npd_bom">
+        <!-- P6 chain -->
+        <mxCell id="e_p6a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p6_po_cust" target="p6_po_sf"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p6b" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p6_po_sf" target="int3">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2017" y="960" />
-              <mxPoint x="612" y="960" />
+              <mxPoint x="2750" y="500" />
+              <mxPoint x="2750" y="750" />
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="e_p6c" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="int3" target="sap_so"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Product & Pricing flow -->
-        <mxCell id="e25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="prod_master" target="prod_index"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="prod_index" target="prod_book"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="prod_book" target="prod_contract"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- P6 → P7 -->
+        <mxCell id="e_67" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sap_so" target="sap_inv"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p7a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sap_inv" target="sap_grn"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Product → Quote (from prod_contract bottom down to quote_create top-left corner) -->
-        <mxCell id="e28" value="Priced items available" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;fontSize=12;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="prod_contract" target="quote_create">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1257" y="1200" />
-              <mxPoint x="347" y="1200" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
+        <!-- Integration hex 4: SAP invoice + GRN → SF payment tracking -->
+        <mxCell id="e_p7_i1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="sap_inv" target="int4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p7_i2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="sap_grn" target="int4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p7_i3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="int4" target="p7_pay"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- Quote flow -->
-        <mxCell id="e29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_create" target="quote_dec"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e30" value="No — needs approval" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=11;fontColor=#B85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_dec" target="quote_appr"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e31" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontColor=#0E8088;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="pool" source="quote_dec" target="quote_send">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="590" y="220" />
-              <mxPoint x="1150" y="220" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e32" value="Approved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontColor=#0E8088;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_appr" target="quote_send"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_send" target="quote_won"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e34" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0E8088;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_won" target="quote_hand"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e35" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontColor=#B85450;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="pool" source="quote_won" target="quote_lost"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="quote_hand" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
-
-        <!-- Integration links — dashed, routed via long vertical corridors on the FAR RIGHT so they never cross the main flow -->
-        <mxCell id="e37" value="master data sync" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;startArrow=classic;strokeColor=#0E8088;strokeWidth=2;fontSize=11;dashed=1;fontColor=#0E8088;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="pool" source="mdm_sync" target="prod_master">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="342" y="1440" />
-              <mxPoint x="342" y="1180" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e38" value="errors" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;fontSize=11;dashed=1;fontColor=#0E8088;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="pool" source="mdm_sync" target="mdm_err"><mxGeometry relative="1" as="geometry"/></mxCell>
-
-        <mxCell id="e39" value="feeds Reports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;fontSize=11;dashed=1;fontColor=#0E8088;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pool" source="opp_pipe" target="reports">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="947" y="650" />
-              <mxPoint x="1540" y="650" />
-              <mxPoint x="1540" y="1520" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e40" value="attach to timeline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#0E8088;strokeWidth=2;fontSize=11;dashed=1;fontColor=#0E8088;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="pool" source="email_log" target="opp_act">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1190" y="1440" />
-              <mxPoint x="1320" y="1440" />
-              <mxPoint x="1320" y="620" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
+        <!-- SF payment tracking chain -->
+        <mxCell id="e_p7_pay" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p7_pay" target="p7_coll"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_p7_end" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="p7_coll" target="p7_end"><mxGeometry relative="1" as="geometry"/></mxCell>
 
       </root>
     </mxGraphModel>
