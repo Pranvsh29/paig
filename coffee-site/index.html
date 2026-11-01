@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvard Coffee Roasters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a roaster's logbook. Expanded industrial headlines over a quiet ledger grid;
+   the hero is a live roast curve, the one loud moment on the page. */
+:root {
+  --paper: #EDEFEA;      /* cool parchment, leaf-biased */
+  --surface: #F7F8F5;
+  --ink: #15201B;        /* cast-iron green-black */
+  --leaf: #2D4A3D;       /* coffee-leaf green */
+  --mute: #56645D;
+  --rule: #CAD1C9;
+  --cherry: #A61E36;     /* ripe coffee cherry: the single accent */
+  --on-cherry: #FFFFFF;
+  --husk: #B08A55;       /* parchment husk / green-coffee gold */
+
+  --hero-bg: #13201A;
+  --hero-fg: #E9EDE7;
+  --hero-mute: #98A79F;
+  --hero-grid: rgba(233, 237, 231, 0.08);
+  --hero-cherry: #E8506A;
+  --hero-husk: #D6B98A;
+
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3rem;
+  --step-2: 1.7rem;
+  --step-3: clamp(1.9rem, 1.4rem + 2vw, 2.75rem);
+  --step-4: clamp(2.5rem, 1.6rem + 4.2vw, 4.75rem);
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --maxw: 1240px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1512;
+    --surface: #141E19;
+    --ink: #E6EAE4;
+    --leaf: #9CC1AC;
+    --mute: #98A79F;
+    --rule: #26332D;
+    --cherry: #E8506A;
+    --on-cherry: #1B0A0E;
+    --husk: #D6B98A;
+    --hero-bg: #09100D;
+    --hero-grid: rgba(233, 237, 231, 0.07);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1512;
+  --surface: #141E19;
+  --ink: #E6EAE4;
+  --leaf: #9CC1AC;
+  --mute: #98A79F;
+  --rule: #26332D;
+  --cherry: #E8506A;
+  --on-cherry: #1B0A0E;
+  --husk: #D6B98A;
+  --hero-bg: #09100D;
+  --hero-grid: rgba(233, 237, 231, 0.07);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-optical-sizing: auto;
+}
+img, svg, canvas { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--cherry); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+  font-stretch: 105%;
+  padding: 14px 22px; border-radius: 2px; border: 1px solid transparent;
+  text-decoration: none; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.btn-primary { background: var(--cherry); color: var(--on-cherry); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { border-color: currentColor; color: inherit; background: transparent; }
+.btn-ghost:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.btn .arrow { transition: transform .2s; }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* ---------- Header ---------- */
+.utility {
+  background: var(--hero-bg); color: var(--hero-mute);
+  border-bottom: 1px solid var(--hero-grid);
+}
+.utility .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 9px; padding-bottom: 9px; flex-wrap: wrap; }
+.utility span { font-size: 0.72rem; }
+.utility b { color: var(--hero-fg); font-weight: 500; }
+
+header.site {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--hero-bg) 94%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--hero-fg);
+  border-bottom: 1px solid var(--hero-grid);
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-word { display: flex; flex-direction: column; line-height: 1; gap: 5px; }
+.brand-word strong { font-family: var(--font-display); font-weight: 800; font-stretch: 125%; letter-spacing: 0.1em; font-size: 1.15rem; }
+.brand-word small { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em; color: var(--hero-mute); }
+nav.primary ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
+nav.primary a { text-decoration: none; font-family: var(--font-display); font-size: 0.92rem; font-weight: 500; color: var(--hero-mute); transition: color .2s; }
+nav.primary a:hover { color: var(--hero-fg); }
+.header-actions { display: flex; align-items: center; gap: 14px; }
+.bag {
+  display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--hero-grid);
+  color: var(--hero-fg); padding: 9px 14px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.78rem; cursor: pointer;
+}
+.bag-count {
+  min-width: 20px; height: 20px; border-radius: 10px; display: inline-grid; place-items: center;
+  background: var(--hero-cherry); color: #1B0A0E; font-weight: 500; font-size: 0.72rem; padding: 0 6px;
+}
+.bag.bump .bag-count { animation: bump .35s ease; }
+@keyframes bump { 50% { transform: scale(1.3); } }
+@media (max-width: 900px) { nav.primary { display: none; } }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--hero-bg); color: var(--hero-fg); overflow: hidden; }
+.hero .wrap {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 72px); align-items: center;
+  padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(48px, 7vw, 88px);
+}
+.eyebrow { color: var(--hero-husk); display: flex; gap: 10px; align-items: center; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.hero h1 {
+  font-size: var(--step-4); font-weight: 800; font-stretch: 118%;
+  line-height: 0.98; letter-spacing: -0.025em; margin: 22px 0 24px;
+}
+.hero h1 em { font-style: normal; color: var(--hero-cherry); }
+.hero .lede { font-size: var(--step-1); line-height: 1.5; color: color-mix(in srgb, var(--hero-fg) 82%, transparent); max-width: 34ch; font-weight: 300; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.hero .btn-primary { background: var(--hero-cherry); color: #1B0A0E; }
+
+.roastlog {
+  border: 1px solid var(--hero-grid);
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0));
+  border-radius: 3px;
+}
+.roastlog-head {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 14px 18px; border-bottom: 1px solid var(--hero-grid); color: var(--hero-mute);
+}
+.roastlog-head .live { color: var(--hero-fg); display: inline-flex; align-items: center; gap: 8px; }
+.roastlog-head .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--hero-cherry); box-shadow: 0 0 0 4px color-mix(in srgb, var(--hero-cherry) 25%, transparent); }
+.chart-box { position: relative; height: clamp(260px, 30vw, 360px); padding: 8px 4px 0; }
+#roastCanvas { width: 100%; height: 100%; }
+.legend { display: flex; gap: 18px; padding: 0 18px 4px; color: var(--hero-mute); font-size: 0.7rem; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 16px; height: 2px; display: inline-block; }
+.readouts {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--hero-grid);
+}
+.readout { padding: 14px 16px; border-right: 1px solid var(--hero-grid); display: flex; flex-direction: column; gap: 4px; }
+.readout:last-child { border-right: 0; }
+.readout .k { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hero-mute); }
+.readout .v { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.readout .s { font-family: var(--font-mono); font-size: 0.7rem; color: var(--hero-mute); font-variant-numeric: tabular-nums; }
+.readout.hl .v { color: var(--hero-cherry); }
+@media (max-width: 980px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .readouts { grid-template-columns: repeat(3, 1fr); }
+  .readout:nth-child(3) { border-right: 0; }
+  .readout:nth-child(n+4) { border-top: 1px solid var(--hero-grid); }
+}
+@media (max-width: 520px) {
+  .readouts { grid-template-columns: repeat(2, 1fr); }
+  .readout:nth-child(3) { border-right: 1px solid var(--hero-grid); }
+  .readout:nth-child(2n) { border-right: 0; }
+  .readout:nth-child(n+3) { border-top: 1px solid var(--hero-grid); }
+}
+
+/* ---------- Figures band ---------- */
+.figures { border-bottom: 1px solid var(--rule); background: var(--surface); }
+.figures .wrap { display: grid; grid-template-columns: repeat(5, 1fr); }
+.figure { padding: 34px 20px 30px 0; display: flex; flex-direction: column; gap: 6px; }
+.figure + .figure { padding-left: 24px; border-left: 1px solid var(--rule); }
+.figure .big { font-family: var(--font-display); font-weight: 700; font-stretch: 112%; font-size: var(--step-3); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.figure .big small { font-size: 0.45em; font-weight: 600; margin-left: 4px; color: var(--mute); letter-spacing: 0; }
+.figure p { color: var(--mute); font-size: 0.95rem; line-height: 1.4; max-width: 22ch; }
+@media (max-width: 900px) {
+  .figures .wrap { grid-template-columns: repeat(2, 1fr); }
+  .figure, .figure + .figure { padding: 24px 16px; border-left: 0; border-top: 1px solid var(--rule); }
+  .figure:nth-child(even) { border-left: 1px solid var(--rule); }
+  .figure:first-child { grid-column: 1 / -1; border-top: 0; }
+  .figure:nth-child(n+2):nth-child(odd) { border-left: 1px solid var(--rule); }
+  .figure:nth-child(n+2):nth-child(even) { border-left: 0; }
+}
+
+/* ---------- Sections ---------- */
+section.block { padding: clamp(64px, 9vw, 120px) 0; }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: 48px; }
+.sec-head .label { color: var(--cherry); margin-bottom: 16px; }
+.sec-head h2 { font-size: var(--step-3); font-weight: 800; font-stretch: 115%; line-height: 1.02; letter-spacing: -0.02em; }
+.sec-head p { color: var(--mute); max-width: 52ch; font-size: 1.08rem; }
+@media (max-width: 800px) { .sec-head { grid-template-columns: 1fr; gap: 16px; } }
+
+/* ---------- Ledger (current lots) ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.chip {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 8px 14px; border: 1px solid var(--rule); background: transparent; color: var(--mute);
+  border-radius: 999px; cursor: pointer; transition: all .15s;
+}
+.chip:hover { color: var(--ink); border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip .ct { opacity: 0.6; margin-left: 4px; }
+
+.ledger { border-top: 2px solid var(--ink); }
+.ledger-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 2.3fr) minmax(0, 1fr) minmax(0, 1.4fr) 64px minmax(0, 2fr) 128px;
+  gap: 20px; align-items: center;
+  padding: 20px 0; border-bottom: 1px solid var(--rule);
+}
+.ledger-row.head { padding: 12px 0; color: var(--mute); }
+.ledger-row.head > * { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.ledger-row:not(.head) { transition: background .2s; }
+.ledger-row:not(.head):hover { background: color-mix(in srgb, var(--surface) 70%, transparent); }
+.lot { font-family: var(--font-mono); font-size: 0.8rem; color: var(--mute); }
+.coffee-name { font-family: var(--font-display); font-weight: 700; font-stretch: 108%; font-size: 1.12rem; line-height: 1.2; }
+.coffee-meta { color: var(--mute); font-size: 0.92rem; }
+.proc { font-size: 0.95rem; line-height: 1.35; }
+.proc small { display: block; color: var(--mute); font-family: var(--font-mono); font-size: 0.72rem; margin-top: 2px; }
+.roast { display: flex; flex-direction: column; gap: 6px; }
+.roast-strip {
+  position: relative; height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, #2A1810, #4E2E1C 25%, #7A4A2A 50%, #A87444 72%, #D2AE7C);
+}
+.roast-strip b {
+  position: absolute; top: -4px; width: 3px; height: 14px; background: var(--ink); border-radius: 1px;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+.roast-label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--mute); }
+.score { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.score small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 0.64rem; color: var(--mute); letter-spacing: 0.08em; }
+.notes { font-style: italic; font-size: 1rem; line-height: 1.4; }
+.buy { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.price { font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--font-mono); font-weight: 400; font-size: 0.7rem; color: var(--mute); margin-left: 4px; }
+.add {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid var(--ink); background: transparent; color: var(--ink); padding: 7px 12px; border-radius: 2px; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.add:hover { background: var(--ink); color: var(--paper); }
+.add.done { background: var(--cherry); border-color: var(--cherry); color: var(--on-cherry); }
+.ledger-row[hidden] { display: none; }
+.ledger-foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 18px; color: var(--mute); font-size: 0.92rem; }
+
+@media (max-width: 1060px) {
+  .ledger-row { grid-template-columns: 80px minmax(0, 2fr) minmax(0, 1.3fr) 60px 120px; }
+  .ledger-row > .proc-col, .ledger-row.head > .proc-col { display: none; }
+}
+@media (max-width: 760px) {
+  .ledger-row.head { display: none; }
+  .ledger-row {
+    grid-template-columns: 1fr auto; gap: 10px 16px; padding: 22px 0;
+    grid-template-areas: "lot score" "name name" "roast roast" "notes notes" "buy buy";
+  }
+  .ledger-row > .lot { grid-area: lot; }
+  .ledger-row > .name-col { grid-area: name; }
+  .ledger-row > .roast { grid-area: roast; }
+  .ledger-row > .score { grid-area: score; text-align: right; }
+  .ledger-row > .notes { grid-area: notes; }
+  .ledger-row > .buy { grid-area: buy; flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+/* ---------- Process ---------- */
+.process { background: var(--surface); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); counter-reset: step; border-top: 1px solid var(--ink); }
+.step { padding: 28px 24px 8px 0; display: flex; flex-direction: column; gap: 12px; }
+.step + .step { padding-left: 24px; border-left: 1px solid var(--rule); }
+.step .n { font-family: var(--font-mono); color: var(--cherry); font-size: 0.78rem; letter-spacing: 0.1em; }
+.step h3 { font-size: 1.15rem; font-weight: 700; font-stretch: 104%; line-height: 1.2; }
+.step p { color: var(--mute); font-size: 0.98rem; line-height: 1.5; }
+.step .spec { margin-top: auto; padding-top: 12px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink); letter-spacing: 0.04em; border-top: 1px dashed var(--rule); }
+@media (max-width: 1000px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step, .step + .step { padding: 24px 16px 20px 0; border-left: 0; border-bottom: 1px solid var(--rule); }
+  .step:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--rule); }
+}
+@media (max-width: 560px) {
+  .steps { grid-template-columns: 1fr; }
+  .step:nth-child(even) { padding-left: 0; border-left: 0; }
+}
+
+/* ---------- Origins + roasteries ---------- */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+.panel-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 8px; }
+.panel-title h3 { font-size: 1.35rem; font-weight: 700; font-stretch: 112%; }
+.panel-title span { color: var(--mute); }
+.bars { list-style: none; margin: 0; padding: 0; }
+.bars li { display: grid; grid-template-columns: 130px minmax(0, 1fr) 48px; gap: 16px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+.bars .c { font-size: 1rem; }
+.bars .track { height: 10px; background: color-mix(in srgb, var(--rule) 55%, transparent); border-radius: 0 2px 2px 0; }
+.bars .fill { height: 100%; background: var(--leaf); border-radius: 0 2px 2px 0; transform-origin: left; }
+.bars li:first-child .fill { background: var(--cherry); }
+.bars .pct { font-family: var(--font-mono); font-size: 0.82rem; text-align: right; font-variant-numeric: tabular-nums; }
+.source-note { margin-top: 14px; color: var(--mute); font-size: 0.88rem; }
+
+.roasteries { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.roastery { padding: 22px 20px 22px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px; }
+.roastery:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--rule); }
+.roastery .city { font-family: var(--font-display); font-weight: 700; font-stretch: 110%; font-size: 1.2rem; }
+.roastery .meta { color: var(--mute); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.05em; }
+.roastery .vol { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; font-variant-numeric: tabular-nums; margin-top: 8px; }
+.roastery .vol small { font-size: 0.55em; color: var(--mute); font-weight: 500; }
+.roastery p { color: var(--mute); font-size: 0.95rem; line-height: 1.45; }
+.tag-hq { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; padding: 2px 6px; border: 1px solid var(--cherry); color: var(--cherry); border-radius: 2px; margin-left: 8px; vertical-align: 3px; }
+@media (max-width: 480px) {
+  .roasteries { grid-template-columns: 1fr; }
+  .roastery:nth-child(even) { padding-left: 0; border-left: 0; }
+}
+
+/* ---------- Brew guide ---------- */
+.brew-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+@media (max-width: 900px) { .brew-grid { grid-template-columns: 1fr; } }
+.brew-intro p { color: var(--mute); margin-top: 16px; max-width: 44ch; }
+.brew-intro blockquote {
+  margin: 32px 0 0; padding: 0 0 0 20px; border-left: 2px solid var(--cherry);
+  font-style: italic; font-size: 1.15rem; line-height: 1.5;
+}
+.brew-intro cite { display: block; margin-top: 10px; font-style: normal; color: var(--mute); }
+.calc { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; }
+.calc-controls { padding: 24px; display: flex; flex-direction: column; gap: 20px; border-bottom: 1px solid var(--rule); }
+.field-label { display: block; color: var(--mute); margin-bottom: 10px; }
+.seg { display: flex; flex-wrap: wrap; border: 1px solid var(--ink); border-radius: 2px; overflow: hidden; }
+.seg button {
+  flex: 1 1 auto; font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
+  padding: 11px 12px; background: transparent; color: var(--ink); border: 0; border-right: 1px solid var(--rule); cursor: pointer;
+}
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:not([aria-pressed="true"]):hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--ink); border-radius: 2px; }
+.stepper button { width: 44px; height: 44px; background: transparent; border: 0; color: var(--ink); font-size: 1.2rem; cursor: pointer; font-family: var(--font-mono); }
+.stepper button:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+.stepper output { min-width: 100px; text-align: center; font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); padding: 10px 8px; }
+.calc-out { display: grid; grid-template-columns: repeat(3, 1fr); }
+.calc-out div { padding: 20px 24px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; }
+.calc-out div:nth-child(3n) { border-right: 0; }
+.calc-out div:nth-last-child(-n+3) { border-bottom: 0; }
+.calc-out .k { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
+.calc-out .v { font-family: var(--font-display); font-weight: 700; font-stretch: 108%; font-size: 1.6rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.calc-out .v.sm { font-size: 1.1rem; font-weight: 600; }
+.calc-out .first .v { color: var(--cherry); }
+.calc-note { padding: 16px 24px; border-top: 1px solid var(--rule); color: var(--mute); font-size: 0.92rem; }
+@media (max-width: 560px) {
+  .calc-out { grid-template-columns: 1fr 1fr; }
+  .calc-out div { border-right: 1px solid var(--rule) !important; border-bottom: 1px solid var(--rule) !important; }
+  .calc-out div:nth-child(2n) { border-right: 0 !important; }
+  .calc-out div:nth-last-child(-n+2) { border-bottom: 0 !important; }
+}
+
+/* ---------- Wholesale ---------- */
+.wholesale { background: var(--hero-bg); color: var(--hero-fg); }
+.wholesale .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: center; padding-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(64px, 8vw, 112px); }
+@media (max-width: 900px) { .wholesale .wrap { grid-template-columns: 1fr; } }
+.wholesale .label { color: var(--hero-husk); }
+.wholesale h2 { font-size: var(--step-3); font-weight: 800; font-stretch: 118%; line-height: 1.02; letter-spacing: -0.02em; margin: 16px 0 20px; }
+.wholesale p { color: color-mix(in srgb, var(--hero-fg) 78%, transparent); font-size: 1.12rem; max-width: 50ch; }
+.wholesale .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.wholesale .btn-primary { background: var(--hero-cherry); color: #1B0A0E; }
+.offer { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hero-grid); }
+.offer li { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--hero-grid); align-items: baseline; }
+.offer .v { font-family: var(--font-display); font-weight: 700; font-stretch: 112%; font-size: 1.5rem; font-variant-numeric: tabular-nums; color: var(--hero-fg); }
+.offer .d { color: var(--hero-mute); font-size: 0.98rem; line-height: 1.45; }
+
+/* ---------- Footer ---------- */
+footer.site { padding: 64px 0 40px; border-top: 1px solid var(--rule); }
+.foot-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 32px; }
+@media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } .foot-grid > :first-child { grid-column: 1 / -1; } }
+.foot-grid h4 { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); margin: 0 0 14px; font-weight: 500; }
+.foot-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.foot-grid a { text-decoration: none; }
+.foot-grid a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.foot-brand p { color: var(--mute); max-width: 40ch; margin-top: 16px; font-size: 0.98rem; }
+.foot-brand .brand-word strong { color: var(--ink); }
+.foot-brand .brand-word small { color: var(--mute); }
+.foot-base { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--mute); font-size: 0.85rem; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--paper); padding: 12px 18px; border-radius: 2px;
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.02em; transition: opacity .25s, transform .25s; z-index: 50;
+  max-width: calc(100% - 32px);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="utility">
+  <div class="wrap mono">
+    <span>Roasting since <b>1961</b> · Portland · Rotterdam · Melbourne · Yokohama</span>
+    <span>Orders over <b>$45</b> ship free · Roasted Monday to Friday, shipped within <b>48 h</b></span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Halvard Coffee Roasters, home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <ellipse cx="17" cy="17" rx="10.5" ry="14.5" transform="rotate(28 17 17)" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12.2 5.6 C 19 11, 13 20, 21.8 28.4" fill="none" stroke="#E8506A" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-word">
+        <strong>HALVARD</strong>
+        <small>COFFEE ROASTERS · EST. 1961</small>
+      </span>
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="#coffees">Coffees</a></li>
+        <li><a href="#process">Our process</a></li>
+        <li><a href="#origins">Origins</a></li>
+        <li><a href="#brew">Brew guide</a></li>
+        <li><a href="#wholesale">Wholesale</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="bag" id="bagBtn" type="button" aria-live="polite">Bag <span class="bag-count num" id="bagCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow mono">Roast log · Lot HV-2611 · Batch 0418</div>
+      <h1 id="hero-title">Roasted to <em>the second.</em></h1>
+      <p class="lede">We log every batch once a second, from charge to drop, and cup it before it ships. We've worked this way for sixty-five years, and now at four roasteries.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#coffees">Shop current lots <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#process">How we roast</a>
+      </div>
+    </div>
+
+    <figure class="roastlog" style="margin:0" aria-label="Roast profile chart for lot HV-2611, Gedeb Halo">
+      <div class="roastlog-head mono">
+        <span class="live"><i aria-hidden="true"></i> Gedeb Halo · Ethiopia</span>
+        <span>Drum 2 · Portland · 120 kg charge</span>
+      </div>
+      <div class="chart-box"><canvas id="roastCanvas" role="img" aria-label="Bean temperature rises from a turning point of 94 degrees to 209 degrees at drop, with first crack at 9 minutes 46 seconds."></canvas></div>
+      <div class="legend mono">
+        <span><i style="background:var(--hero-cherry)"></i>Bean temp °C</span>
+        <span><i style="background:var(--hero-husk)"></i>Rate of rise °C/min</span>
+      </div>
+      <div class="readouts" id="readouts">
+        <div class="readout"><span class="k">Turning pt</span><span class="v" id="r-tp">0:59</span><span class="s" id="r-tp-s">94 °C</span></div>
+        <div class="readout"><span class="k">Dry end</span><span class="v" id="r-de">5:38</span><span class="s">160 °C</span></div>
+        <div class="readout hl"><span class="k">First crack</span><span class="v" id="r-fc">9:46</span><span class="s">196 °C</span></div>
+        <div class="readout"><span class="k">Drop</span><span class="v" id="r-dr">12:03</span><span class="s" id="r-dr-s">209 °C</span></div>
+        <div class="readout"><span class="k">Development</span><span class="v" id="r-dtr">19.0%</span><span class="s">Agtron 72</span></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- FIGURES -->
+<section class="figures" aria-label="Halvard in figures">
+  <div class="wrap">
+    <div class="figure"><span class="big num">1961</span><p>First roast, a 12 kg drum on SE Belmont Street, Portland</p></div>
+    <div class="figure"><span class="big num">41,200<small>t</small></span><p>Green coffee roasted across four roasteries in 2025</p></div>
+    <div class="figure"><span class="big num">38</span><p>Origin countries, bought direct at harvest</p></div>
+    <div class="figure"><span class="big num">212</span><p>Farm and washing-station partners, 61 of them for over a decade</p></div>
+    <div class="figure"><span class="big num">96<small>%</small></span><p>Of lots traceable to a named farm or washing station</p></div>
+  </div>
+</section>
+
+<!-- COFFEES -->
+<section class="block" id="coffees" aria-labelledby="coffees-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="label mono">Current lots · November 2026</div>
+        <h2 id="coffees-title">This month's roasting ledger</h2>
+      </div>
+      <p>Every coffee we sell has a lot number, an altitude, a process and a roast reading. Here they are in full, the same records our cuppers sign off on.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter by roast">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All <span class="ct" data-count="all"></span></button>
+      <button class="chip" type="button" data-filter="light" aria-pressed="false">Light <span class="ct" data-count="light"></span></button>
+      <button class="chip" type="button" data-filter="medium" aria-pressed="false">Medium <span class="ct" data-count="medium"></span></button>
+      <button class="chip" type="button" data-filter="dark" aria-pressed="false">Dark <span class="ct" data-count="dark"></span></button>
+      <button class="chip" type="button" data-filter="espresso" aria-pressed="false">Espresso <span class="ct" data-count="espresso"></span></button>
+    </div>
+
+    <div class="ledger" id="ledger">
+      <div class="ledger-row head" aria-hidden="true">
+        <span>Lot</span><span>Coffee</span><span class="proc-col">Process · Variety</span><span>Roast · Agtron</span><span>Score</span><span>Tasting notes</span><span style="text-align:right">340 g bag</span>
+      </div>
+    </div>
+    <div class="ledger-foot">
+      <span>Scores follow the SCA 100-point cupping protocol, averaged across three cuppers.</span>
+      <span class="mono">Agtron: higher is lighter</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block process" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="label mono">From cherry to cup</div>
+        <h2 id="process-title">Five checkpoints. No batch skips one.</h2>
+      </div>
+      <p>A coffee reaches you only after it has passed every stage below. Anything that misses a spec is sold as green coffee or goes to our staff café. It never reaches the shelf.</p>
+    </div>
+    <ol class="steps" style="list-style:none;margin:0;padding:0">
+      <li class="step">
+        <span class="n">01 / SOURCE</span>
+        <h3>Buy at harvest</h3>
+        <p>Our buyers visit each partner during harvest. Contracts fix the price before picking starts, and the price sits above the commodity market.</p>
+        <span class="spec">Avg. premium: +68% over C-price</span>
+      </li>
+      <li class="step">
+        <span class="n">02 / GRADE</span>
+        <h3>Grade the green</h3>
+        <p>We pull a 350 g sample from each lot, count the defects and measure moisture and density before a single bag is shipped.</p>
+        <span class="spec">Moisture 10.0–12.0% · ≤5 defects</span>
+      </li>
+      <li class="step">
+        <span class="n">03 / PROFILE</span>
+        <h3>Build the profile</h3>
+        <p>Each new lot gets sample-roasted at three development times and cupped blind. The winning curve becomes the production target.</p>
+        <span class="spec">100 g sample roasts · 3 levels</span>
+      </li>
+      <li class="step">
+        <span class="n">04 / ROAST</span>
+        <h3>Roast to the curve</h3>
+        <p>Production roasts are logged once a second against the target curve. Operators adjust gas and airflow by hand to stay on it.</p>
+        <span class="spec">Tolerance: ±2 Agtron of target</span>
+      </li>
+      <li class="step">
+        <span class="n">05 / CUP</span>
+        <h3>Cup every batch</h3>
+        <p>Within 24 hours of roasting, the quality team cups a sample from every batch. Two signatures release it for packing.</p>
+        <span class="spec">SCA protocol · 3 cuppers per table</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ORIGINS + ROASTERIES -->
+<section class="block" id="origins" aria-labelledby="origins-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="label mono">Where it comes from</div>
+        <h2 id="origins-title">Thirty-eight countries, four roasteries</h2>
+      </div>
+      <p>We roast close to the people who drink the coffee, so it reaches cafés and kitchens within days of leaving the drum, not weeks.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <div class="panel-title"><h3>Green coffee by origin</h3><span class="mono">Share of 2025 volume</span></div>
+        <ul class="bars" id="bars"></ul>
+        <p class="source-note">Volume measured by weight of green coffee received at our roasteries, January–December 2025.</p>
+      </div>
+      <div id="roastery">
+        <div class="panel-title"><h3>Our roasteries</h3><span class="mono">Tonnes roasted, 2025</span></div>
+        <div class="roasteries">
+          <div class="roastery">
+            <span class="city">Portland<span class="tag-hq">HQ</span></span>
+            <span class="meta">OREGON, USA · SINCE 1961</span>
+            <span class="vol num">14,800 <small>t</small></span>
+            <p>Three 120 kg drums, our green-coffee lab and the cupping school.</p>
+          </div>
+          <div class="roastery">
+            <span class="city">Rotterdam</span>
+            <span class="meta">NETHERLANDS · SINCE 1998</span>
+            <span class="vol num">11,600 <small>t</small></span>
+            <p>Supplies 14 European markets. It runs on a heat-recovery loop that cuts gas use by 31%.</p>
+          </div>
+          <div class="roastery">
+            <span class="city">Melbourne</span>
+            <span class="meta">VICTORIA, AUSTRALIA · SINCE 2007</span>
+            <span class="vol num">8,200 <small>t</small></span>
+            <p>Our espresso centre. Most of our wholesale blends are developed here.</p>
+          </div>
+          <div class="roastery">
+            <span class="city">Yokohama</span>
+            <span class="meta">KANAGAWA, JAPAN · SINCE 2015</span>
+            <span class="vol num">6,600 <small>t</small></span>
+            <p>Light-roast specialists, roasting for 900 cafés across East Asia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BREW GUIDE -->
+<section class="block process" id="brew" aria-labelledby="brew-title">
+  <div class="wrap">
+    <div class="brew-grid">
+      <div class="brew-intro">
+        <div class="label mono" style="color:var(--cherry)">Brew guide</div>
+        <h2 id="brew-title" style="font-size:var(--step-3);font-weight:800;font-stretch:115%;line-height:1.02;letter-spacing:-0.02em;margin-top:16px">Our recipes, by weight</h2>
+        <p>These are the starting recipes our cupping school teaches. Weigh both the coffee and the water. A scale matters more than any grinder upgrade.</p>
+        <blockquote>
+          Start here, then change one thing at a time. If it tastes sour, grind finer. If it tastes bitter, grind coarser.
+          <cite class="mono">Head of Coffee Education, Portland</cite>
+        </blockquote>
+      </div>
+
+      <div class="calc" aria-labelledby="brew-title">
+        <div class="calc-controls">
+          <div>
+            <span class="field-label mono" id="method-label">Method</span>
+            <div class="seg" role="group" aria-labelledby="method-label" id="methodSeg"></div>
+          </div>
+          <div>
+            <span class="field-label mono" id="qty-label">Servings</span>
+            <div class="stepper" role="group" aria-labelledby="qty-label">
+              <button type="button" id="qtyMinus" aria-label="One serving fewer">−</button>
+              <output id="qtyOut" aria-live="polite">2 cups</output>
+              <button type="button" id="qtyPlus" aria-label="One serving more">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <div class="first"><span class="k">Coffee</span><span class="v num" id="o-coffee">31 g</span></div>
+          <div><span class="k">Water</span><span class="v num" id="o-water">500 g</span></div>
+          <div><span class="k">Ratio</span><span class="v num" id="o-ratio">1 : 16</span></div>
+          <div><span class="k">Grind</span><span class="v sm" id="o-grind">Medium-fine</span></div>
+          <div><span class="k">Water temp</span><span class="v sm num" id="o-temp">94 °C</span></div>
+          <div><span class="k">Brew time</span><span class="v sm num" id="o-time">3:00–3:30</span></div>
+        </div>
+        <p class="calc-note" id="o-note">Pour in three stages, letting the bed drain between pours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHOLESALE -->
+<section class="wholesale" id="wholesale" aria-labelledby="wholesale-title">
+  <div class="wrap">
+    <div>
+      <div class="label mono">Wholesale &amp; hospitality</div>
+      <h2 id="wholesale-title">Your café runs on our roasting schedule.</h2>
+      <p>We supply 2,400 cafés, hotels and offices in 19 countries. Every partner gets a named account roaster, barista training at our roasteries and equipment service from our own technicians.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#wholesale">Become a partner <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#wholesale">Download the price list</a>
+      </div>
+    </div>
+    <ul class="offer">
+      <li><span class="v num">48 h</span><span class="d">From drum to your door in every market we roast in</span></li>
+      <li><span class="v num">20 kg</span><span class="d">Minimum weekly order, with standing orders from 5 kg for offices</span></li>
+      <li><span class="v num">6 wk</span><span class="d">Of barista training for your opening team, at no charge</span></li>
+      <li><span class="v num">4 h</span><span class="d">Equipment call-out response in Portland, Rotterdam and Melbourne</span></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Halvard Coffee Roasters, back to top">
+          <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true">
+            <ellipse cx="17" cy="17" rx="10.5" ry="14.5" transform="rotate(28 17 17)" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M12.2 5.6 C 19 11, 13 20, 21.8 28.4" fill="none" stroke="var(--cherry)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-word"><strong>HALVARD</strong><small>COFFEE ROASTERS · EST. 1961</small></span>
+        </a>
+        <p>Specialty coffee, roasted to the second in Portland, Rotterdam, Melbourne and Yokohama.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li><a href="#coffees">Current lots</a></li><li><a href="#coffees">Subscriptions</a></li><li><a href="#brew">Brew guide</a></li><li><a href="#coffees">Gift cards</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#process">Our process</a></li><li><a href="#origins">Sourcing report 2025</a></li><li><a href="#roastery">Roasteries</a></li><li><a href="#top">Careers</a></li></ul>
+      </div>
+      <div>
+        <h4>Business</h4>
+        <ul><li><a href="#wholesale">Wholesale</a></li><li><a href="#wholesale">Offices</a></li><li><a href="#wholesale">Training</a></li><li><a href="#wholesale">Equipment service</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Halvard Coffee Roasters. A fictional company, created as a design study.</span>
+      <span class="mono">Lot data shown is illustrative</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function mmss(s) { s = Math.round(s); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+
+  /* ---------------- Roast curve ---------------- */
+  // Bean temperature model: charge at 200 °C, probe dips to a turning point, then a declining rate of rise.
+  var BASE = 65, A = 180, TAU = 450, CHARGE = 200;
+  function BT(t) { return BASE + (CHARGE - BASE) * Math.exp(-t / 20) + A * (1 - Math.exp(-t / TAU)); }
+  var tp = 0, tpT = 999;
+  for (var t = 0; t < 200; t++) { var v = BT(t); if (v < tpT) { tpT = v; tp = t; } }
+  function cross(val) { for (var s = tp; s < 1200; s++) if (BT(s) >= val) return s; return null; }
+  var dryEnd = cross(160), fc = cross(196);
+  var DTR = 0.19, drop = Math.round(fc / (1 - DTR));
+  var dropT = BT(drop);
+  function ror(s) { return (BT(s + 15) - BT(s - 15)) * 2; } // °C per minute
+
+  document.getElementById("r-tp").textContent = mmss(tp);
+  document.getElementById("r-tp-s").textContent = Math.round(tpT) + " °C";
+  document.getElementById("r-de").textContent = mmss(dryEnd);
+  document.getElementById("r-fc").textContent = mmss(fc);
+  document.getElementById("r-dr").textContent = mmss(drop);
+  document.getElementById("r-dr-s").textContent = Math.round(dropT) + " °C";
+  document.getElementById("r-dtr").textContent = (((drop - fc) / drop) * 100).toFixed(1) + "%";
+
+  var canvas = document.getElementById("roastCanvas");
+  var ctx = canvas.getContext("2d");
+  var progress = reduced ? 1 : 0;
+  var T_MAX = 780, Y_MIN = 50, Y_MAX = 230, R_MAX = 30;
+
+  function draw() {
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+
+    var fg = css("--hero-fg"), mute = css("--hero-mute"), grid = css("--hero-grid");
+    var cherry = css("--hero-cherry"), husk = css("--hero-husk");
+    var padL = 46, padR = 44, padT = 18, padB = 30;
+    var pw = w - padL - padR, ph = h - padT - padB;
+    function X(s) { return padL + (s / T_MAX) * pw; }
+    function Y(c) { return padT + (1 - (c - Y_MIN) / (Y_MAX - Y_MIN)) * ph; }
+    function YR(r) { return padT + (1 - r / R_MAX) * ph; }
+
+    ctx.font = "500 10px 'IBM Plex Mono', ui-monospace, monospace";
+    ctx.lineWidth = 1;
+
+    // Phase bands: drying, Maillard, development
+    var nowS = progress * drop;
+    var phases = [[0, dryEnd, 0.0], [dryEnd, fc, 0.025], [fc, drop, 0.07]];
+    phases.forEach(function (p) {
+      if (nowS <= p[0]) return;
+      ctx.fillStyle = "rgba(232,80,106," + p[2] + ")";
+      ctx.fillRect(X(p[0]), padT, X(Math.min(p[1], nowS)) - X(p[0]), ph);
+    });
+
+    // Grid
+    ctx.strokeStyle = grid; ctx.fillStyle = mute; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (var c = 50; c <= 230; c += 30) {
+      ctx.beginPath(); ctx.moveTo(padL, Y(c) + 0.5); ctx.lineTo(w - padR, Y(c) + 0.5); ctx.stroke();
+      ctx.fillText(c + "°", padL - 8, Y(c));
+    }
+    ctx.textAlign = "left";
+    for (var r = 0; r <= 30; r += 10) { ctx.fillText(String(r), w - padR + 8, YR(r)); }
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    for (var m = 0; m <= 13; m += 2) {
+      if (m * 60 > T_MAX) break;
+      ctx.fillText(m + ":00", X(m * 60), h - padB + 10);
+    }
+
+    // Phase labels
+    ctx.textBaseline = "top"; ctx.textAlign = "center"; ctx.fillStyle = mute;
+    var labels = [["DRYING", 0, dryEnd], ["MAILLARD", dryEnd, fc], ["DEV", fc, drop]];
+    labels.forEach(function (l) { if (nowS > l[2] - 1) ctx.fillText(l[0], (X(l[1]) + X(l[2])) / 2, padT + 6); });
+
+    // RoR line
+    ctx.strokeStyle = husk; ctx.lineWidth = 1.5; ctx.setLineDash([]);
+    ctx.beginPath();
+    var started = false;
+    for (var s = tp + 30; s <= nowS; s += 3) {
+      var rv = Math.max(0, Math.min(R_MAX, ror(s)));
+      if (!started) { ctx.moveTo(X(s), YR(rv)); started = true; } else ctx.lineTo(X(s), YR(rv));
+    }
+    ctx.stroke();
+
+    // BT area + line
+    var grad = ctx.createLinearGradient(0, padT, 0, padT + ph);
+    grad.addColorStop(0, "rgba(232,80,106,0.22)");
+    grad.addColorStop(1, "rgba(232,80,106,0)");
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(BT(0)));
+    for (var s2 = 1; s2 <= nowS; s2 += 2) ctx.lineTo(X(s2), Y(BT(s2)));
+    ctx.lineTo(X(nowS), padT + ph); ctx.lineTo(X(0), padT + ph); ctx.closePath();
+    ctx.fillStyle = grad; ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(BT(0)));
+    for (var s3 = 1; s3 <= nowS; s3 += 2) ctx.lineTo(X(s3), Y(BT(s3)));
+    ctx.strokeStyle = cherry; ctx.lineWidth = 2.25; ctx.stroke();
+
+    // Event markers
+    var events = [[tp, "TP"], [dryEnd, "DE"], [fc, "FC"], [drop, "DROP"]];
+    ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+    events.forEach(function (e) {
+      if (nowS < e[0]) return;
+      var ex = X(e[0]), ey = Y(BT(e[0]));
+      ctx.strokeStyle = grid; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(ex + 0.5, ey); ctx.lineTo(ex + 0.5, padT + ph); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath(); ctx.arc(ex, ey, e[1] === "FC" || e[1] === "DROP" ? 4.5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = e[1] === "FC" ? cherry : css("--hero-bg"); ctx.fill();
+      ctx.strokeStyle = cherry; ctx.lineWidth = 1.75; ctx.stroke();
+      ctx.fillStyle = fg;
+      var ly = e[1] === "TP" ? ey + 20 : ey - 10;
+      ctx.fillText(e[1], ex, ly);
+    });
+
+    // Live head
+    if (progress < 1) {
+      var hx = X(nowS), hy = Y(BT(nowS));
+      ctx.beginPath(); ctx.arc(hx, hy, 5, 0, Math.PI * 2); ctx.fillStyle = cherry; ctx.fill();
+    }
+  }
+
+  function animate() {
+    var start = null, dur = 2600;
+    function frame(ts) {
+      if (!start) start = ts;
+      var k = Math.min(1, (ts - start) / dur);
+      progress = 1 - Math.pow(1 - k, 2.2);
+      draw();
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  draw();
+  if (!reduced) animate();
+  window.addEventListener("resize", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  /* ---------------- Ledger ---------------- */
+  var lots = [
+    { lot: "HV-2611", name: "Gedeb Halo", origin: "Ethiopia", region: "Gedeo, Yirgacheffe", masl: "2,150", process: "Washed", variety: "Heirloom 74110 / 74112", agtron: 72, score: 88.5, notes: "Jasmine, bergamot, white peach", price: 24, cat: ["light"] },
+    { lot: "HV-2598", name: "Kiambu Peaberry", origin: "Kenya", region: "Kiambu County", masl: "1,850", process: "Double washed", variety: "SL28, SL34", agtron: 68, score: 88.0, notes: "Blackcurrant, grapefruit, cane sugar", price: 26, cat: ["light"] },
+    { lot: "HV-2545", name: "Nyamasheke", origin: "Rwanda", region: "Western Province", masl: "1,800", process: "Washed", variety: "Red Bourbon", agtron: 66, score: 87.5, notes: "Red currant, black tea, wildflower honey", price: 23, cat: ["light"] },
+    { lot: "HV-2604", name: "Finca El Mirador", origin: "Colombia", region: "Pitalito, Huila", masl: "1,780", process: "Washed", variety: "Caturra, Castillo", agtron: 62, score: 87.0, notes: "Red apple, panela, cocoa nib", price: 21, cat: ["medium"] },
+    { lot: "HV-2573", name: "Huehue Highlands", origin: "Guatemala", region: "Huehuetenango", masl: "1,900", process: "Washed", variety: "Bourbon, Caturra", agtron: 58, score: 86.5, notes: "Toffee, orange zest, almond", price: 20, cat: ["medium"] },
+    { lot: "HV-2587", name: "Cerrado Estate", origin: "Brazil", region: "Cerrado Mineiro", masl: "1,150", process: "Natural", variety: "Yellow Bourbon", agtron: 52, score: 85.5, notes: "Hazelnut, milk chocolate, dried fig", price: 18, cat: ["dark", "espresso"] },
+    { lot: "HV-2560", name: "No. 7 Espresso", origin: "Blend", region: "Brazil, Colombia, Ethiopia", masl: "1,150–2,100", process: "Washed + natural", variety: "Three components", agtron: 48, score: 86.0, notes: "Dark chocolate, black cherry, brown sugar", price: 19, cat: ["dark", "espresso"] },
+    { lot: "HV-2552", name: "Gayo Night", origin: "Indonesia", region: "Aceh, Sumatra", masl: "1,450", process: "Wet-hulled", variety: "Tim Tim, Ateng", agtron: 40, score: 84.5, notes: "Cedar, molasses, baker's chocolate", price: 19, cat: ["dark"] }
+  ];
+  function roastName(a) { return a >= 65 ? "Light" : a >= 55 ? "Medium" : "Dark"; }
+
+  var ledger = document.getElementById("ledger");
+  lots.forEach(function (l) {
+    var row = document.createElement("div");
+    row.className = "ledger-row";
+    row.dataset.cat = l.cat.join(" ");
+    var pos = Math.max(0, Math.min(100, ((l.agtron - 25) / (95 - 25)) * 100));
+    row.innerHTML =
+      '<span class="lot">' + l.lot + '</span>' +
+      '<div class="name-col"><div class="coffee-name">' + l.name + '</div><div class="coffee-meta">' + l.origin + ' · ' + l.region + ' · <span class="num">' + l.masl + '</span> masl</div></div>' +
+      '<div class="proc proc-col">' + l.process + '<small>' + l.variety + '</small></div>' +
+      '<div class="roast"><div class="roast-strip" aria-hidden="true"><b style="left:calc(' + pos + '% - 1.5px)"></b></div>' +
+      '<div class="roast-label"><span>' + roastName(l.agtron) + '</span><span class="num">' + l.agtron + '</span></div></div>' +
+      '<div class="score">' + l.score.toFixed(1) + '<small>SCA</small></div>' +
+      '<div class="notes">' + l.notes + '</div>' +
+      '<div class="buy"><span class="price num">$' + l.price + '<small>340 g</small></span>' +
+      '<button class="add" type="button" data-name="' + l.name + '">Add to bag</button></div>';
+    ledger.appendChild(row);
+  });
+
+  var counts = { all: lots.length, light: 0, medium: 0, dark: 0, espresso: 0 };
+  lots.forEach(function (l) { l.cat.forEach(function (c) { counts[c]++; }); });
+  document.querySelectorAll("[data-count]").forEach(function (el) { el.textContent = counts[el.dataset.count]; });
+
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.filter;
+      document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+      ledger.querySelectorAll(".ledger-row:not(.head)").forEach(function (row) {
+        row.hidden = !(f === "all" || row.dataset.cat.split(" ").indexOf(f) !== -1);
+      });
+    });
+  });
+
+  var bag = 0, bagBtn = document.getElementById("bagBtn"), bagCount = document.getElementById("bagCount");
+  var toast = document.getElementById("toast"), toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg; toast.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2400);
+  }
+  ledger.addEventListener("click", function (e) {
+    var btn = e.target.closest(".add"); if (!btn) return;
+    bag++; bagCount.textContent = bag;
+    bagBtn.classList.remove("bump"); void bagBtn.offsetWidth; bagBtn.classList.add("bump");
+    btn.classList.add("done"); btn.textContent = "Added";
+    setTimeout(function () { btn.classList.remove("done"); btn.textContent = "Add to bag"; }, 1600);
+    showToast("Added " + btn.dataset.name + ", 340 g. Bag: " + bag + (bag === 1 ? " item" : " items"));
+  });
+  bagBtn.addEventListener("click", function () {
+    showToast(bag ? "Your bag has " + bag + (bag === 1 ? " item" : " items") + ". Checkout isn't part of this demo." : "Your bag is empty. Add a coffee from the ledger.");
+  });
+
+  /* ---------------- Origin bars ---------------- */
+  var origins = [["Brazil", 31], ["Colombia", 22], ["Ethiopia", 12], ["Guatemala", 9], ["Honduras", 8], ["Indonesia", 7], ["Kenya", 5], ["Rwanda", 3], ["30 others", 3]];
+  var bars = document.getElementById("bars");
+  origins.forEach(function (o) {
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="c">' + o[0] + '</span><span class="track"><span class="fill" style="display:block;width:' + (o[1] / 31 * 100) + '%"></span></span><span class="pct">' + o[1] + '%</span>';
+    bars.appendChild(li);
+  });
+
+  /* ---------------- Brew calculator ---------------- */
+  var methods = {
+    "Pour-over": { ratio: 16, perServ: 250, unit: "cup", grind: "Medium-fine", temp: "94 °C", time: "3:00–3:30", note: "Bloom with twice the coffee's weight in water for 40 s, then pour the rest in two stages." },
+    "French press": { ratio: 15, perServ: 250, unit: "cup", grind: "Coarse", temp: "95 °C", time: "4:00", note: "Stir at one minute, skim the crust at four, then plunge gently and pour it all off the grounds." },
+    "AeroPress": { ratio: 14, perServ: 220, unit: "cup", grind: "Medium-fine", temp: "88 °C", time: "2:00", note: "Inverted method: steep for 1:30, swirl, then press for 30 s. Stop at the hiss." },
+    "Espresso": { ratio: 2, perServ: 18, unit: "shot", grind: "Fine", temp: "93 °C", time: "25–30 s", espresso: true, note: "18 g in, 36 g out. Water here is the weight of liquid espresso in the cup." },
+    "Cold brew": { ratio: 8, perServ: 250, unit: "cup", grind: "Coarse", temp: "Room temp", time: "16–18 h", note: "This makes a concentrate. Dilute 1:1 with water or milk over ice before serving." }
+  };
+  var methodNames = Object.keys(methods), current = "Pour-over", qty = 2;
+  var seg = document.getElementById("methodSeg");
+  methodNames.forEach(function (n) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = n; b.setAttribute("aria-pressed", String(n === current));
+    b.addEventListener("click", function () {
+      current = n;
+      seg.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      renderBrew();
+    });
+    seg.appendChild(b);
+  });
+  var minus = document.getElementById("qtyMinus"), plus = document.getElementById("qtyPlus");
+  minus.addEventListener("click", function () { if (qty > 1) { qty--; renderBrew(); } });
+  plus.addEventListener("click", function () { if (qty < 8) { qty++; renderBrew(); } });
+
+  function renderBrew() {
+    var m = methods[current], coffee, water;
+    if (m.espresso) { coffee = m.perServ * qty; water = coffee * m.ratio; }
+    else { water = m.perServ * qty; coffee = Math.round(water / m.ratio); }
+    document.getElementById("qtyOut").textContent = qty + " " + m.unit + (qty === 1 ? "" : "s");
+    document.getElementById("o-coffee").textContent = coffee + " g";
+    document.getElementById("o-water").textContent = water.toLocaleString("en-US") + " g";
+    document.getElementById("o-ratio").textContent = "1 : " + m.ratio;
+    document.getElementById("o-grind").textContent = m.grind;
+    document.getElementById("o-temp").textContent = m.temp;
+    document.getElementById("o-time").textContent = m.time;
+    document.getElementById("o-note").textContent = m.note;
+    minus.disabled = qty <= 1; plus.disabled = qty >= 8;
+  }
+  renderBrew();
+})();
+</script>
+</body>
+</html>
