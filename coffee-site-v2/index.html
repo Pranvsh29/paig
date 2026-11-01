@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvard Coffee, The Slow Art</title>
+<meta name="description" content="Halvard Coffee Roasters. Specialty coffee sourced from 38 countries and roasted slowly in Portland, Rotterdam, Melbourne and Yokohama since 1961.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Design system: generated with UI UX Pro Max (--design-system, variance 6, motion 8, density 3)
+   Pattern: Scroll-Triggered Storytelling. Intro hook > I Origin > II Roast > III Cup > Climax CTA
+   Style: Exaggerated Minimalism type + Liquid Glass chrome (nav, cards, toasts)
+   Palette: "Premium black + gold". Colour builds intensity chapter by chapter: light stone to espresso to black.
+   ========================================================================== */
+:root {
+  /* Skill palette */
+  --color-primary: #1C1917;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #44403C;
+  --color-accent: #A16207;          /* gold, for light surfaces (4.7:1 on background) */
+  --color-on-accent: #FFFFFF;
+  --color-background: #FAFAF9;
+  --color-foreground: #0C0A09;
+  --color-card: #FFFFFF;
+  --color-border: #D6D3D1;
+  --color-muted-foreground: #57534E; /* stone-600: warm match for the skill's slate #475569, same 7.3:1 */
+  --color-destructive: #DC2626;
+  --color-ring: #1C1917;
+  /* Derived for dark chapters */
+  --gold-on-dark: #D4A54A;          /* 7.7:1 on primary */
+  --stone-on-dark: #A8A29E;         /* 6.9:1 on primary */
+  --night: #0C0A09;
+  --cream: #F5F0E8;
+
+  --font-display: "Cormorant", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  --fs-giant: clamp(3.4rem, 9.6vw, 10rem);
+  --fs-h2: clamp(2.6rem, 6.4vw, 6.25rem);
+  --fs-h3: clamp(1.6rem, 2.4vw, 2.25rem);
+  --fs-lead: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-eyebrow: 0.75rem;
+
+  /* Density 3: spacious scale */
+  --space-section: clamp(96px, 13vw, 192px);
+  --gutter: clamp(20px, 5vw, 72px);
+  --maxw: 1360px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* expo.out */
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+  --radius: 20px;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, canvas { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; margin: 0; text-wrap: balance; line-height: 0.95; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 4px; }
+.dark :focus-visible, .on-dark:focus-visible { outline-color: var(--gold-on-dark); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--color-primary); color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; transition: top var(--dur-fast); }
+.skip:focus { top: 16px; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.eyebrow {
+  font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-accent);
+  display: inline-flex; align-items: center; gap: 14px;
+}
+.eyebrow::before { content: ""; width: 36px; height: 1px; background: currentColor; }
+.dark .eyebrow { color: var(--gold-on-dark); }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.ital { font-style: italic; font-weight: 400; }
+.gold { color: var(--color-accent); }
+.dark .gold { color: var(--gold-on-dark); }
+.icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 52px; padding: 0 28px; border-radius: 999px; border: 1px solid transparent;
+  font-family: var(--font-body); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn .icon { transition: transform var(--dur-base) var(--ease-out); }
+.btn:hover .icon { transform: translateX(4px); }
+.btn-gold { background: var(--gold-on-dark); color: var(--color-primary); }
+.btn-gold:hover { background: #E2B865; }
+.btn-dark { background: var(--color-primary); color: var(--color-on-primary); }
+.btn-dark:hover { background: var(--color-secondary); }
+.btn-line { border-color: currentColor; background: transparent; }
+.btn-line:hover { background: rgba(255,255,255,0.08); }
+.light .btn-line:hover { background: rgba(28,25,23,0.06); }
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em;
+  text-decoration: none; padding: 12px 0; min-height: 44px; cursor: pointer; border-bottom: 1px solid currentColor;
+}
+.link-arrow .icon { transition: transform var(--dur-base) var(--ease-out); }
+.link-arrow:hover .icon { transform: translateX(5px); }
+
+/* ---------- Glass (Liquid Glass chrome) ---------- */
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 40px rgba(0,0,0,0.28);
+}
+
+/* ---------- Progress + Nav ---------- */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--gold-on-dark); transform-origin: 0 50%; transform: scaleX(0); }
+
+.nav {
+  position: fixed; top: 14px; left: 50%; z-index: 50; width: min(calc(100% - 28px), 1180px);
+  transform: translateX(-50%); border-radius: 999px; color: #fff;
+  transition: transform 500ms var(--ease-out), background-color var(--dur-base);
+}
+.nav.glass { background: linear-gradient(135deg, rgba(41,37,36,0.80), rgba(28,25,23,0.66)); }
+.nav.is-hidden { transform: translate(-50%, calc(-100% - 24px)); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 64px; padding: 0 10px 0 24px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; min-height: 44px; }
+.logo-word { font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; letter-spacing: 0.24em; line-height: 1; }
+.nav-links { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; color: rgba(255,255,255,0.78);
+  transition: color var(--dur-fast), background-color var(--dur-fast);
+}
+.nav-links a:hover, .nav-links a.is-active { color: #fff; background: rgba(255,255,255,0.1); }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  position: relative; display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: #fff; cursor: pointer;
+  transition: background-color var(--dur-fast), transform var(--dur-fast);
+}
+.icon-btn:hover { background: rgba(255,255,255,0.16); }
+.icon-btn:active { transform: scale(0.94); }
+.bag-count {
+  position: absolute; top: -3px; right: -3px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px;
+  background: var(--gold-on-dark); color: var(--color-primary); font-size: 0.7rem; font-weight: 700; display: grid; place-items: center;
+  transform: scale(0); transition: transform 400ms var(--ease-out);
+}
+.bag-count.has { transform: scale(1); }
+.nav .btn { min-height: 48px; padding: 0 22px; }
+.menu-btn { display: none; }
+@media (max-width: 960px) {
+  .nav-links, .nav .btn-shop { display: none; }
+  .menu-btn { display: inline-grid; }
+}
+.sheet {
+  position: fixed; inset: 92px 14px auto 14px; z-index: 49; border-radius: 28px; padding: 18px; color: #fff;
+  background: rgba(28,25,23,0.82);
+  opacity: 0; transform: translateY(-12px) scale(0.98); pointer-events: none; visibility: hidden;
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base);
+}
+.sheet.is-open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+.sheet ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.sheet a { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 12px; text-decoration: none; font-family: var(--font-display); font-size: 1.7rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sheet li:last-child a { border-bottom: 0; }
+
+/* ---------- Chapter rail ---------- */
+.rail { position: fixed; right: 26px; top: 50%; transform: translateY(-50%); z-index: 40; display: none; }
+@media (min-width: 1200px) { .rail { display: block; } }
+.rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.rail a {
+  display: flex; align-items: center; justify-content: flex-end; gap: 12px; min-height: 32px; text-decoration: none;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rail-fg, #A8A29E);
+}
+.rail a span { opacity: 0; transform: translateX(6px); transition: opacity var(--dur-base), transform var(--dur-base) var(--ease-out); }
+.rail a:hover span, .rail a:focus-visible span, .rail a.is-active span { opacity: 1; transform: none; }
+.rail a i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid currentColor; transition: background-color var(--dur-base), transform var(--dur-base) var(--ease-out); }
+.rail a.is-active { color: var(--rail-active, #D4A54A); }
+.rail a.is-active i { background: currentColor; transform: scale(1.4); }
+
+/* ==========================================================================
+   HERO: intro hook
+   ========================================================================== */
+.hero {
+  position: relative; min-height: 100svh; background: var(--night); color: #fff; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 78% 62%, rgba(212,165,74,0.20), transparent 70%),
+    radial-gradient(40% 40% at 12% 18%, rgba(161,98,7,0.12), transparent 70%);
+}
+#beans { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-content { position: relative; z-index: 2; padding-top: 140px; padding-bottom: clamp(40px, 6vw, 72px); }
+.hero h1 {
+  font-size: var(--fs-giant); font-weight: 500; line-height: 0.88; letter-spacing: -0.035em;
+  margin: 28px 0 0; perspective: 800px; max-width: 11ch;
+}
+.hero h1 .ital { color: var(--gold-on-dark); }
+.hero-foot { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: end; margin-top: clamp(32px, 5vw, 56px); }
+.hero-lead { font-size: var(--fs-lead); line-height: 1.7; color: var(--stone-on-dark); max-width: 46ch; font-weight: 300; }
+.hero-lead strong { color: #fff; font-weight: 500; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.hero-meta {
+  display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: clamp(40px, 6vw, 72px);
+  padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone-on-dark); font-weight: 500;
+}
+.hero-meta b { color: #fff; font-weight: 600; }
+.scroll-cue { display: inline-flex; align-items: center; gap: 14px; }
+.scroll-cue i { position: relative; width: 1px; height: 36px; background: rgba(255,255,255,0.2); overflow: hidden; }
+.scroll-cue i::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--gold-on-dark); animation: cue 2.2s var(--ease-out) infinite; }
+@keyframes cue { to { top: 110%; } }
+@media (max-width: 860px) {
+  .hero-foot { grid-template-columns: 1fr; }
+  .hero-ctas { justify-content: flex-start; }
+}
+
+/* ---------- Marquee ---------- */
+.marquee { background: var(--color-primary); color: var(--cream); overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); }
+.marquee-track { display: flex; width: max-content; padding: 26px 0; }
+.marquee-group { display: flex; align-items: center; gap: 48px; padding-right: 48px; }
+.marquee-group span { font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.6rem); white-space: nowrap; }
+.marquee-group svg { width: 18px; height: 18px; color: var(--gold-on-dark); }
+.no-motion .marquee-track { width: auto; flex-wrap: wrap; }
+.no-motion .marquee-group[aria-hidden="true"] { display: none; }
+
+/* ==========================================================================
+   CHAPTER I: Origin (light stone)
+   ========================================================================== */
+.chapter { position: relative; }
+.light { background: var(--color-background); color: var(--color-foreground); }
+.origin { padding: var(--space-section) 0 0; }
+.chapter-mark { display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px; }
+.chapter-mark .roman { font-family: var(--font-display); font-style: italic; font-size: 1.5rem; color: var(--color-accent); }
+.dark .chapter-mark .roman { color: var(--gold-on-dark); }
+.origin-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
+@media (max-width: 960px) { .origin-grid { grid-template-columns: 1fr; } }
+.h2 { font-size: var(--fs-h2); line-height: 0.92; letter-spacing: -0.03em; }
+.lead { font-size: var(--fs-lead); line-height: 1.75; color: var(--color-muted-foreground); max-width: 52ch; margin-top: 32px; font-weight: 400; }
+.dark .lead { color: var(--stone-on-dark); }
+.mapcard { position: relative; aspect-ratio: 1 / 1.05; border-radius: var(--radius); background: var(--color-card); border: 1px solid var(--color-border); overflow: hidden; }
+#contours { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-label {
+  position: absolute; left: 22px; bottom: 22px; right: 22px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--color-muted-foreground);
+}
+.map-label strong { display: block; font-family: var(--font-display); font-size: 1.6rem; letter-spacing: -0.01em; text-transform: none; color: var(--color-foreground); font-weight: 600; margin-bottom: 2px; }
+.map-tag { position: absolute; top: 22px; left: 22px; padding: 8px 14px; border-radius: 999px; background: var(--color-primary); color: #fff; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(80px, 10vw, 140px); border-top: 1px solid var(--color-border); }
+.stat { padding: 36px 24px 0 0; }
+.stat + .stat { padding-left: 24px; border-left: 1px solid var(--color-border); }
+.stat .big { font-family: var(--font-display); font-size: clamp(3rem, 5.4vw, 5.25rem); font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
+.stat .big sup { font-size: 0.4em; vertical-align: 0.9em; margin-left: 2px; color: var(--color-accent); font-weight: 600; }
+.stat p { color: var(--color-muted-foreground); font-size: 0.9rem; margin-top: 12px; max-width: 24ch; line-height: 1.55; }
+@media (max-width: 860px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat, .stat + .stat { padding: 28px 16px 28px 0; border-left: 0; border-bottom: 1px solid var(--color-border); }
+  .stat:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--color-border); }
+}
+
+/* Origins horizontal gallery */
+.origins { padding: var(--space-section) 0; overflow: hidden; }
+.origins-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 56px; }
+.origins-head .h3 { font-size: clamp(2.2rem, 4.4vw, 4rem); line-height: 0.95; letter-spacing: -0.025em; }
+.origins-head p { color: var(--color-muted-foreground); max-width: 40ch; }
+.track-wrap { position: relative; }
+.track { display: flex; gap: 24px; padding: 0 var(--gutter); width: max-content; }
+.ocard {
+  position: relative; width: clamp(290px, 30vw, 420px); aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden;
+  color: #fff; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate;
+  background: var(--color-primary);
+}
+.ocard::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--art); transition: transform 900ms var(--ease-out); }
+.ocard:hover::before { transform: scale(1.06); }
+.ocard::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(12,10,9,0) 35%, rgba(12,10,9,0.78)); }
+.ocard .idx { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+.ocard h3 { font-size: clamp(2.6rem, 4vw, 3.6rem); letter-spacing: -0.03em; }
+.ocard .notes { font-family: var(--font-display); font-style: italic; font-size: 1.25rem; color: #F0DDB0; margin-top: 8px; line-height: 1.3; }
+.ocard dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 18px 0 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.8rem; }
+.ocard dt { color: rgba(255,255,255,0.7); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; font-weight: 600; padding-top: 2px; }
+.ocard dd { margin: 0; font-weight: 500; }
+.no-pin .track-wrap { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.no-pin .track-wrap::-webkit-scrollbar { display: none; }
+.no-pin .ocard { scroll-snap-align: start; scroll-margin-left: var(--gutter); }
+.drag-hint { display: none; margin-top: 22px; padding: 0 var(--gutter); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted-foreground); font-weight: 600; }
+.no-pin .drag-hint { display: block; }
+
+/* ==========================================================================
+   CHAPTER II: Roast (pinned, background roasts from cream to espresso)
+   ========================================================================== */
+.roast { --rbg: var(--cream); --rfg: var(--color-foreground); --rmute: var(--color-muted-foreground); --racc: var(--color-accent); background: var(--rbg); color: var(--rfg); }
+.roast-stage { min-height: 100svh; display: flex; align-items: center; padding: 120px 0 56px; }
+.roast-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.roast .chapter-mark .roman, .roast .eyebrow { color: var(--racc); }
+.roast .h2 { font-size: clamp(2.6rem, 5.2vw, 5.25rem); }
+.roast .lead { color: var(--rmute); font-size: 1rem; margin-top: 24px; }
+.bean-wrap { position: relative; display: grid; place-items: center; aspect-ratio: 1; }
+.bean-glow { position: absolute; inset: 12%; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgba(212,165,74,0.25)), transparent 65%); filter: blur(10px); }
+#bean { position: relative; width: 78%; height: auto; overflow: visible; will-change: transform; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.25)); }
+.chips { position: absolute; inset: 0; pointer-events: none; }
+.chips i { position: absolute; left: 50%; top: 50%; width: 8px; height: 5px; border-radius: 40%; background: #C8A06A; opacity: 0; }
+.readout { display: grid; gap: 22px; }
+.temp { font-family: var(--font-display); font-size: clamp(4rem, 8vw, 7.5rem); line-height: 0.85; letter-spacing: -0.04em; font-weight: 500; }
+.temp small { font-size: 0.35em; letter-spacing: 0; margin-left: 4px; color: var(--racc); }
+.readout-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--rfg) 18%, transparent); }
+.readout-row .k { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--rmute); }
+.readout-row .v { font-family: var(--font-display); font-size: 1.9rem; font-weight: 500; line-height: 1.1; }
+.stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.stages li {
+  display: grid; grid-template-columns: 14px 1fr auto; gap: 14px; align-items: center; padding: 10px 0;
+  color: var(--rmute); transition: color var(--dur-base);
+}
+.stages li i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid currentColor; transition: background-color var(--dur-base), transform var(--dur-base) var(--ease-out); }
+.stages li b { font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; }
+.stages li span { font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.stages li.done { color: var(--rfg); }
+.stages li.done i { background: currentColor; }
+.stages li.active { color: var(--racc); }
+.stages li.active i { background: currentColor; transform: scale(1.5); }
+.roast-bar { margin-top: clamp(32px, 4vw, 56px); }
+.roast-bar .scale { position: relative; height: 10px; border-radius: 5px; background: linear-gradient(90deg, #7D8A55 0%, #B9A96A 34%, #C8A85E 50%, #A9773F 66%, #7A4A2A 81%, #4A2C1A 100%); }
+.roast-bar .scale b { position: absolute; top: -6px; width: 4px; height: 22px; border-radius: 2px; background: var(--rfg); left: 0; transform: translateX(-2px); box-shadow: 0 0 0 3px var(--rbg); }
+.roast-bar .ticks { display: flex; justify-content: space-between; margin-top: 12px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--rmute); }
+@media (max-width: 1060px) {
+  .roast-grid { grid-template-columns: 1fr 1fr; }
+  .roast-copy { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .roast-stage { padding-top: 100px; }
+  .roast-grid { grid-template-columns: 1fr; gap: 20px; }
+  .roast .lead { display: none; }
+  .bean-wrap { max-width: 230px; margin: 0 auto; }
+  .temp { font-size: 4rem; }
+  .stages li { padding: 6px 0; }
+}
+
+/* ==========================================================================
+   CHAPTER III: The Cup (espresso, glass cards)
+   ========================================================================== */
+.dark { background: var(--color-primary); color: #fff; }
+.cup { padding: var(--space-section) 0; position: relative; overflow: hidden; }
+.cup::before { content: ""; position: absolute; width: 900px; height: 900px; right: -300px; top: -200px; background: radial-gradient(circle, rgba(212,165,74,0.12), transparent 60%); pointer-events: none; }
+.cup-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: end; margin-bottom: 64px; }
+@media (max-width: 900px) { .cup-head { grid-template-columns: 1fr; } }
+.products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1180px) { .products { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .products { grid-template-columns: 1fr; } }
+.pcard {
+  --mx: 50%; --my: 0%; position: relative; border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 18px;
+  transform-style: preserve-3d; transition: transform 400ms var(--ease-out), border-color var(--dur-base);
+  background: linear-gradient(160deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025));
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.pcard::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255,255,255,0.13), transparent 45%);
+  transition: opacity var(--dur-base);
+}
+.pcard:hover { border-color: rgba(212,165,74,0.45); }
+.pcard:hover::after { opacity: 1; }
+.pack { position: relative; aspect-ratio: 1 / 1.05; border-radius: 14px; display: grid; place-items: center; overflow: hidden; background: var(--pack-bg); }
+.pack svg { width: 62%; height: auto; transition: transform 700ms var(--ease-out); filter: drop-shadow(0 22px 24px rgba(0,0,0,0.35)); }
+.pcard:hover .pack svg { transform: translateY(-6px) rotate(-2deg); }
+.badge { position: absolute; top: 12px; left: 12px; padding: 6px 12px; border-radius: 999px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(12,10,9,0.55); color: #F0DDB0; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pcard h3 { font-size: 1.9rem; letter-spacing: -0.02em; line-height: 1; }
+.pcard .origin-line { font-size: 0.78rem; color: var(--stone-on-dark); letter-spacing: 0.06em; margin-top: 6px; }
+.pcard .tnotes { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: #F0DDB0; line-height: 1.35; }
+.roastlvl { display: flex; align-items: center; gap: 10px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-on-dark); font-weight: 600; }
+.roastlvl .dots { display: flex; gap: 4px; }
+.roastlvl .dots i { width: 14px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.14); }
+.roastlvl .dots i.on { background: var(--gold-on-dark); }
+.sizes { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+.sizes button {
+  min-height: 40px; border: 0; border-radius: 999px; background: transparent; color: var(--stone-on-dark); cursor: pointer;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; transition: background-color var(--dur-base) var(--ease-out), color var(--dur-base);
+}
+.sizes button[aria-pressed="true"] { background: #fff; color: var(--color-primary); }
+.buy { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 4px; }
+.price { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; line-height: 1; transition: opacity 180ms; }
+.price.swap { opacity: 0; }
+.add {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--gold-on-dark); color: var(--color-primary); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.04em;
+  transition: background-color var(--dur-base), transform var(--dur-fast) var(--ease-out);
+}
+.add:hover { background: #E2B865; }
+.add:active { transform: scale(0.95); }
+.add.added { background: #fff; }
+
+.press { margin-top: clamp(96px, 12vw, 160px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+@media (max-width: 900px) { .press { grid-template-columns: 1fr; } }
+.press blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.9rem, 3.4vw, 3.1rem); line-height: 1.15; letter-spacing: -0.015em; font-weight: 400; }
+.press blockquote .gold { font-style: italic; }
+.press cite { display: block; margin-top: 26px; font-style: normal; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone-on-dark); font-weight: 600; }
+.partners { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,0.12); }
+.partners div { padding: 24px 12px 24px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-family: var(--font-display); font-size: 1.45rem; color: rgba(255,255,255,0.82); }
+.partners div:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(255,255,255,0.12); }
+.partners small { display: block; font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-on-dark); margin-top: 4px; font-weight: 600; }
+
+/* ==========================================================================
+   CLIMAX CTA (night)
+   ========================================================================== */
+.climax { background: var(--night); color: #fff; padding: var(--space-section) 0 calc(var(--space-section) * 0.7); position: relative; overflow: hidden; }
+.climax::before { content: ""; position: absolute; left: 50%; top: 0; width: 1200px; height: 800px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(212,165,74,0.16), transparent); pointer-events: none; }
+.climax-inner { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 112px); align-items: center; }
+@media (max-width: 960px) { .climax-inner { grid-template-columns: 1fr; } }
+.climax h2 { font-size: clamp(3.4rem, 9vw, 9rem); line-height: 0.86; letter-spacing: -0.04em; }
+.climax h2 .ital { color: var(--gold-on-dark); }
+.climax .lead { color: var(--stone-on-dark); }
+.cupart { position: relative; width: min(100%, 300px); margin: 0 0 10px; }
+.cupart .steam path { fill: none; stroke: rgba(240,221,176,0.55); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 60 140; animation: steam 3.6s linear infinite; }
+.cupart .steam path:nth-child(2) { animation-delay: -1.2s; }
+.cupart .steam path:nth-child(3) { animation-delay: -2.4s; }
+@keyframes steam { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+.subscribe { border-radius: 28px; padding: clamp(24px, 3vw, 40px); }
+.subscribe h3 { font-size: 2.2rem; letter-spacing: -0.02em; }
+.subscribe > p { color: var(--stone-on-dark); margin-top: 10px; font-size: 0.95rem; }
+.field { display: grid; gap: 8px; margin-top: 22px; }
+.field label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #E7E5E4; }
+.field input, .field select {
+  min-height: 54px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12,10,9,0.45); color: #fff;
+  padding: 0 18px; font: inherit; font-size: 1rem; transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D4A54A' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; cursor: pointer; }
+.field select option { background: var(--color-primary); }
+.field input::placeholder { color: #8A8580; }
+.field input:focus, .field select:focus { outline: none; border-color: var(--gold-on-dark); box-shadow: 0 0 0 3px rgba(212,165,74,0.3); }
+.field input[aria-invalid="true"] { border-color: #F87171; }
+.field .err { color: #FCA5A5; font-size: 0.85rem; min-height: 1.2em; }
+.field .help { color: var(--stone-on-dark); font-size: 0.8rem; }
+.subscribe .btn { width: 100%; margin-top: 18px; }
+.success { display: none; align-items: flex-start; gap: 14px; margin-top: 20px; padding: 16px 18px; border-radius: 14px; background: rgba(212,165,74,0.12); border: 1px solid rgba(212,165,74,0.4); }
+.success.show { display: flex; }
+.success .icon { color: var(--gold-on-dark); margin-top: 2px; }
+.success p { font-size: 0.92rem; color: #E7E5E4; }
+
+/* ---------- Footer ---------- */
+footer { background: var(--night); color: var(--stone-on-dark); border-top: 1px solid rgba(255,255,255,0.08); padding: 72px 0 40px; }
+.foot { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+@media (max-width: 860px) { .foot { grid-template-columns: 1fr 1fr; } .foot > :first-child { grid-column: 1 / -1; } }
+.foot h4 { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; font-weight: 600; margin-bottom: 16px; }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.foot ul a { display: inline-flex; min-height: 40px; align-items: center; text-decoration: none; font-size: 0.92rem; transition: color var(--dur-fast); }
+.foot ul a:hover { color: #fff; }
+.foot .logo { color: #fff; }
+.foot-brand p { margin-top: 18px; max-width: 38ch; font-size: 0.92rem; }
+.bigword { font-family: var(--font-display); font-weight: 500; font-size: clamp(4rem, 17vw, 17rem); line-height: 0.8; letter-spacing: 0.02em; color: transparent; -webkit-text-stroke: 1px rgba(212,165,74,0.35); margin-top: 72px; text-align: center; user-select: none; }
+.foot-base { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 70; display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 999px; color: #fff; background: rgba(28,25,23,0.78); font-size: 0.88rem; max-width: calc(100% - 32px);
+  transform: translate(-50%, 140%); transition: transform 450ms var(--ease-out);
+}
+.toast.show { transform: translate(-50%, 0); }
+.toast .icon { color: var(--gold-on-dark); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .scroll-cue i::after { display: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16"/><path d="M4 16h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12h18"/><path d="m5.6 5.6 12.8 12.8"/><path d="m18.4 5.6-12.8 12.8"/></symbol>
+  <symbol id="i-bean" viewBox="0 0 34 34"><ellipse cx="17" cy="17" rx="10" ry="14" transform="rotate(28 17 17)"/><path d="M12.4 5.8C19 11 13 20 21.6 28.2"/></symbol>
+</svg>
+
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<header class="nav glass" id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="Halvard Coffee Roasters, home">
+      <svg class="icon" style="width:28px;height:28px;stroke:#D4A54A" aria-hidden="true"><use href="#i-bean"/></svg>
+      <span class="logo-word">HALVARD</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#origin" data-nav="origin">Origin</a></li>
+        <li><a href="#roast" data-nav="roast">The Roast</a></li>
+        <li><a href="#cup" data-nav="cup">Coffees</a></li>
+        <li><a href="#subscribe" data-nav="subscribe">Subscribe</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="bagBtn" type="button" aria-label="Bag, 0 items">
+        <svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>
+        <span class="bag-count" id="bagCount" aria-hidden="true">0</span>
+      </button>
+      <a class="btn btn-gold btn-shop" href="#cup">Shop coffee</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="sheet glass" id="sheet">
+  <ul>
+    <li><a href="#origin">Origin <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a href="#roast">The Roast <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a href="#cup">Coffees <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a href="#subscribe">Subscribe <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+  </ul>
+</div>
+
+<nav class="rail" aria-label="Chapters">
+  <ol>
+    <li><a href="#top" data-rail="top"><span>Prologue</span><i></i></a></li>
+    <li><a href="#origin" data-rail="origin"><span>I · Origin</span><i></i></a></li>
+    <li><a href="#roast" data-rail="roast"><span>II · Roast</span><i></i></a></li>
+    <li><a href="#cup" data-rail="cup"><span>III · Cup</span><i></i></a></li>
+    <li><a href="#subscribe" data-rail="subscribe"><span>Epilogue</span><i></i></a></li>
+  </ol>
+</nav>
+
+<main id="main">
+
+<!-- =================== PROLOGUE / HERO =================== -->
+<section class="hero chapter" id="top" data-chapter="top" data-rail-theme="dark" aria-labelledby="hero-title">
+  <canvas id="beans" aria-hidden="true"></canvas>
+  <div class="wrap hero-content" id="heroContent">
+    <span class="eyebrow" data-hero-fade>Halvard Coffee Roasters · Est. 1961</span>
+    <h1 id="hero-title" data-hero-title>The slow art of the <span class="ital">perfect</span> roast.</h1>
+    <div class="hero-foot">
+      <p class="hero-lead" data-hero-fade>We buy at harvest from <strong>212 farms in 38 countries</strong>, roast each lot to its own curve, and cup every batch before it ships. We've done it this way for sixty-five years.</p>
+      <div class="hero-ctas" data-hero-fade>
+        <a class="btn btn-gold" href="#cup">Shop the collection <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-line" href="#origin">Follow the bean</a>
+      </div>
+    </div>
+    <div class="hero-meta" data-hero-fade>
+      <span class="scroll-cue"><i aria-hidden="true"></i>Scroll to begin</span>
+      <span>Portland · Rotterdam · Melbourne · Yokohama</span>
+      <span><b class="num">41,200</b> tonnes roasted in 2025</span>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-label="Tasting notes from this season's coffees">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-group">
+      <span>Jasmine</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Bergamot</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Blackcurrant</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Panela</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Toffee</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Dark chocolate</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>White peach</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+      <span>Cedar</span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span>Jasmine</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Bergamot</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Blackcurrant</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Panela</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Toffee</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Dark chocolate</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>White peach</span><svg class="icon"><use href="#i-spark"/></svg>
+      <span>Cedar</span><svg class="icon"><use href="#i-spark"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CHAPTER I · ORIGIN =================== -->
+<section class="chapter light" id="origin" data-chapter="origin" data-rail-theme="light" aria-labelledby="origin-title">
+  <div class="origin wrap">
+    <div class="origin-grid">
+      <div>
+        <div class="chapter-mark"><span class="roman">Chapter I</span><span class="eyebrow">Origin</span></div>
+        <h2 class="h2" id="origin-title" data-split>It begins at <span class="ital gold">2,150</span> metres.</h2>
+        <p class="lead" data-reveal>Our Gedeb Halo grows on the ridges above Yirgacheffe, where cool nights slow the cherry down and concentrate its sugars. A Halvard buyer visits during every harvest. We agree the price before picking starts, and it sits well above the commodity market.</p>
+        <div style="margin-top:36px" data-reveal><a class="link-arrow" href="#origins-gallery">Meet our producers <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      </div>
+      <div class="mapcard" data-reveal>
+        <canvas id="contours" aria-hidden="true"></canvas>
+        <span class="map-tag">Lot HV-2611</span>
+        <div class="map-label">
+          <div><strong>Gedeb, Ethiopia</strong>6.10° N · 38.26° E</div>
+          <div style="text-align:right">Contour interval<br>50 m</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat" data-reveal><div class="big num"><span data-count="38">38</span></div><p>Origin countries, bought direct at harvest</p></div>
+      <div class="stat" data-reveal><div class="big num"><span data-count="212">212</span></div><p>Farm and washing-station partners</p></div>
+      <div class="stat" data-reveal><div class="big num"><span data-count="68">68</span><sup>%</sup></div><p>Average price paid above the C-market in 2025</p></div>
+      <div class="stat" data-reveal><div class="big num"><span data-count="96">96</span><sup>%</sup></div><p>Of lots traceable to a named farm</p></div>
+    </div>
+  </div>
+
+  <div class="origins" id="origins-gallery">
+    <div class="wrap origins-head">
+      <h3 class="h3" data-split>Six origins, <span class="ital">six characters.</span></h3>
+      <p data-reveal>Altitude, soil and processing give each origin its signature. These six make up most of what we roast.</p>
+    </div>
+    <div class="track-wrap" id="trackWrap">
+      <div class="track" id="track">
+        <article class="ocard" style="--art: radial-gradient(120% 80% at 80% 10%, #D4A54A 0%, transparent 55%), radial-gradient(90% 70% at 0% 100%, #7A4A2A, transparent 70%), #3A2A1C">
+          <div class="idx"><span>01</span><span>Africa</span></div>
+          <div><h3>Ethiopia</h3><p class="notes">Jasmine, bergamot, stone fruit</p>
+          <dl><dt>Altitude</dt><dd class="num">1,900–2,300 m</dd><dt>Process</dt><dd>Washed, natural</dd><dt>Harvest</dt><dd>Oct – Jan</dd></dl></div>
+        </article>
+        <article class="ocard" style="--art: radial-gradient(100% 80% at 20% 0%, #9B3B3B 0%, transparent 60%), radial-gradient(80% 60% at 100% 100%, #1C1917, transparent 70%), #5A2626">
+          <div class="idx"><span>02</span><span>Africa</span></div>
+          <div><h3>Kenya</h3><p class="notes">Blackcurrant, grapefruit, cane</p>
+          <dl><dt>Altitude</dt><dd class="num">1,600–2,100 m</dd><dt>Process</dt><dd>Double washed</dd><dt>Harvest</dt><dd>Oct – Dec</dd></dl></div>
+        </article>
+        <article class="ocard" style="--art: radial-gradient(100% 70% at 90% 20%, #A16207 0%, transparent 55%), radial-gradient(90% 80% at 0% 80%, #44403C, transparent 70%), #2B2620">
+          <div class="idx"><span>03</span><span>South America</span></div>
+          <div><h3>Colombia</h3><p class="notes">Red apple, panela, cocoa nib</p>
+          <dl><dt>Altitude</dt><dd class="num">1,500–2,000 m</dd><dt>Process</dt><dd>Washed</dd><dt>Harvest</dt><dd>Year-round</dd></dl></div>
+        </article>
+        <article class="ocard" style="--art: radial-gradient(110% 80% at 10% 10%, #C8A06A 0%, transparent 55%), radial-gradient(90% 70% at 100% 100%, #4A2C1A, transparent 70%), #6B4A2E">
+          <div class="idx"><span>04</span><span>Central America</span></div>
+          <div><h3>Guatemala</h3><p class="notes">Toffee, orange zest, almond</p>
+          <dl><dt>Altitude</dt><dd class="num">1,500–2,000 m</dd><dt>Process</dt><dd>Washed</dd><dt>Harvest</dt><dd>Dec – Mar</dd></dl></div>
+        </article>
+        <article class="ocard" style="--art: radial-gradient(100% 70% at 80% 90%, #A9773F 0%, transparent 60%), radial-gradient(80% 60% at 0% 0%, #57534E, transparent 70%), #3B2A1E">
+          <div class="idx"><span>05</span><span>South America</span></div>
+          <div><h3>Brazil</h3><p class="notes">Hazelnut, milk chocolate, fig</p>
+          <dl><dt>Altitude</dt><dd class="num">900–1,300 m</dd><dt>Process</dt><dd>Natural, pulped</dd><dt>Harvest</dt><dd>May – Sep</dd></dl></div>
+        </article>
+        <article class="ocard" style="--art: radial-gradient(100% 80% at 30% 0%, #44403C 0%, transparent 60%), radial-gradient(90% 70% at 100% 70%, #A16207, transparent 65%), #1C1917">
+          <div class="idx"><span>06</span><span>Asia–Pacific</span></div>
+          <div><h3>Sumatra</h3><p class="notes">Cedar, molasses, baker's cocoa</p>
+          <dl><dt>Altitude</dt><dd class="num">1,100–1,600 m</dd><dt>Process</dt><dd>Wet-hulled</dd><dt>Harvest</dt><dd>Oct – Mar</dd></dl></div>
+        </article>
+      </div>
+    </div>
+    <p class="drag-hint" aria-hidden="true">Swipe to explore →</p>
+  </div>
+</section>
+
+<!-- =================== CHAPTER II · ROAST (pinned) =================== -->
+<section class="chapter roast" id="roast" data-chapter="roast" data-rail-theme="roast" aria-labelledby="roast-title">
+  <div class="roast-stage" id="roastStage">
+    <div class="wrap">
+      <div class="roast-grid">
+        <div class="roast-copy">
+          <div class="chapter-mark"><span class="roman">Chapter II</span><span class="eyebrow">The Roast</span></div>
+          <h2 class="h2" id="roast-title">Twelve minutes that decide <span class="ital">everything.</span></h2>
+          <p class="lead">Keep scrolling to roast lot HV-2611. The bean starts green and dense. As heat builds it yellows, cracks and opens up, roughly doubling in size and losing about 15% of its weight as water.</p>
+        </div>
+
+        <div class="bean-wrap">
+          <div class="bean-glow" id="beanGlow"></div>
+          <svg id="bean" viewBox="0 0 200 260" aria-hidden="true">
+            <defs>
+              <radialGradient id="beanShade" cx="35%" cy="28%" r="80%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0.35"/>
+                <stop offset="45%" stop-color="#fff" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+              </radialGradient>
+            </defs>
+            <g transform="rotate(-18 100 130)">
+              <ellipse id="beanBody" cx="100" cy="130" rx="74" ry="104" fill="#7D8A55"/>
+              <ellipse cx="100" cy="130" rx="74" ry="104" fill="url(#beanShade)"/>
+              <path id="beanCrease" d="M96 32 C 132 78, 64 150, 104 228" fill="none" stroke="#3B4A2A" stroke-width="9" stroke-linecap="round"/>
+              <path d="M101 34 C 137 80, 69 152, 109 226" fill="none" stroke="#fff" stroke-opacity="0.18" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="chips" id="chips" aria-hidden="true"></div>
+        </div>
+
+        <div class="readout" aria-live="off">
+          <div>
+            <div class="eyebrow" style="margin-bottom:12px">Bean temperature</div>
+            <div class="temp num"><span id="tempVal">209</span><small>°C</small></div>
+          </div>
+          <div class="readout-row">
+            <div><div class="k">Roast time</div><div class="v num" id="timeVal">12:03</div></div>
+            <div><div class="k">Weight loss</div><div class="v num" id="lossVal">15.2%</div></div>
+          </div>
+          <ol class="stages" id="stages">
+            <li data-at="24" class="done"><i></i><b>Charge</b><span>24 °C</span></li>
+            <li data-at="160" class="done"><i></i><b>Drying ends</b><span>160 °C</span></li>
+            <li data-at="196" class="done"><i></i><b>First crack</b><span>196 °C</span></li>
+            <li data-at="209" class="done"><i></i><b>Drop</b><span>209 °C</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="roast-bar" aria-hidden="true">
+        <div class="scale"><b id="roastMarker" style="left:100%"></b></div>
+        <div class="ticks"><span>Green</span><span>Yellow</span><span>Cinnamon</span><span>City</span><span>Full city</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CHAPTER III · THE CUP =================== -->
+<section class="chapter dark cup" id="cup" data-chapter="cup" data-rail-theme="dark" aria-labelledby="cup-title">
+  <div class="wrap">
+    <div class="cup-head">
+      <div>
+        <div class="chapter-mark"><span class="roman">Chapter III</span><span class="eyebrow">The Cup</span></div>
+        <h2 class="h2" id="cup-title" data-split>Four coffees we'd put our <span class="ital gold">name</span> on.</h2>
+      </div>
+      <p class="lead" data-reveal style="margin-top:0">Roasted Monday to Friday and shipped within 48 hours. Every bag is stamped with its lot number and roast date. Orders over $45 ship free.</p>
+    </div>
+
+    <div class="products" id="products"></div>
+
+    <div class="press">
+      <blockquote data-reveal>
+        “Halvard is the reason our guests ask what's in the cup. We've poured their <span class="gold">No. 7</span> every morning for eleven years.”
+        <cite>Head of Beverage, The Aldine Hotel, Rotterdam</cite>
+      </blockquote>
+      <div data-reveal>
+        <div class="eyebrow" style="margin-bottom:20px">Poured in 2,400 cafés &amp; hotels</div>
+        <div class="partners">
+          <div>The Aldine<small>Rotterdam</small></div>
+          <div>Marlow &amp; Finch<small>London</small></div>
+          <div>Kōyō Kissaten<small>Kyoto</small></div>
+          <div>Brasserie Verre<small>Lyon</small></div>
+          <div>North Pier<small>Melbourne</small></div>
+          <div>Hotel Sundqvist<small>Stockholm</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== EPILOGUE · CLIMAX CTA =================== -->
+<section class="climax chapter" id="subscribe" data-chapter="subscribe" data-rail-theme="dark" aria-labelledby="climax-title">
+  <div class="wrap climax-inner">
+    <div>
+      <svg class="cupart" viewBox="0 0 300 220" aria-hidden="true" data-reveal>
+        <g class="steam">
+          <path d="M120 96 C 104 72, 136 58, 120 30 S 128 0, 122 -10"/>
+          <path d="M150 96 C 134 70, 168 56, 150 26 S 160 -4, 152 -14"/>
+          <path d="M180 96 C 164 72, 196 58, 180 30 S 188 0, 182 -10"/>
+        </g>
+        <path d="M70 110 h160 v30 a70 70 0 0 1 -70 70 h-20 a70 70 0 0 1 -70 -70z" fill="#1C1917" stroke="#D4A54A" stroke-width="2"/>
+        <path d="M230 124 h14 a22 22 0 0 1 0 44 h-20" fill="none" stroke="#D4A54A" stroke-width="2"/>
+        <ellipse cx="150" cy="110" rx="80" ry="10" fill="#4A2C1A" stroke="#D4A54A" stroke-width="2"/>
+        <path d="M40 214 h220" stroke="rgba(212,165,74,0.4)" stroke-width="2"/>
+      </svg>
+      <h2 id="climax-title" data-split>Find your <span class="ital">roast.</span></h2>
+      <p class="lead" data-reveal>Tell us how you brew and we'll send a different single origin every two or four weeks, roasted to order. Pause, skip or cancel at any time.</p>
+    </div>
+
+    <form class="subscribe glass" id="subForm" novalidate data-reveal>
+      <h3>Start a subscription</h3>
+      <p>First bag ships the Monday after you sign up.</p>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-err" required>
+        <span class="err" id="email-err" role="alert"></span>
+      </div>
+      <div class="field" style="margin-top:6px">
+        <label for="brew">How do you brew?</label>
+        <select id="brew" name="brew">
+          <option>Pour-over or filter</option>
+          <option>Espresso</option>
+          <option>French press</option>
+          <option>Not sure yet: surprise me</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="freq">Delivery</label>
+        <select id="freq" name="freq">
+          <option>Every 2 weeks · $21 per bag</option>
+          <option>Every 4 weeks · $22 per bag</option>
+        </select>
+        <span class="help">Free shipping on every subscription order.</span>
+      </div>
+      <button class="btn btn-gold" type="submit">Start my subscription <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <div class="success" id="success" role="status">
+        <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+        <p id="successText"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="logo" href="#top" aria-label="Halvard Coffee Roasters, back to top">
+          <svg class="icon" style="width:28px;height:28px;stroke:#D4A54A" aria-hidden="true"><use href="#i-bean"/></svg>
+          <span class="logo-word">HALVARD</span>
+        </a>
+        <p>Specialty coffee, roasted slowly in Portland, Rotterdam, Melbourne and Yokohama since 1961.</p>
+      </div>
+      <div><h4>Shop</h4><ul><li><a href="#cup">All coffees</a></li><li><a href="#subscribe">Subscriptions</a></li><li><a href="#cup">Gift cards</a></li><li><a href="#cup">Brewing gear</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#origin">Sourcing</a></li><li><a href="#roast">How we roast</a></li><li><a href="#origins-gallery">Our producers</a></li><li><a href="#top">Careers</a></li></ul></div>
+      <div><h4>Business</h4><ul><li><a href="#cup">Wholesale</a></li><li><a href="#cup">Hotels &amp; hospitality</a></li><li><a href="#cup">Office coffee</a></li><li><a href="#cup">Barista training</a></li></ul></div>
+    </div>
+    <div class="bigword" aria-hidden="true">HALVARD</div>
+    <div class="foot-base">
+      <span>© 2026 Halvard Coffee Roasters. A fictional company, created as a design study.</span>
+      <span>Built with the UI UX Pro Max design system</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast glass" id="toast" role="status" aria-live="polite"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="toastText"></span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+  var motion = hasGSAP && !reduce;
+  if (!motion) root.classList.add("no-motion");
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function hex(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function mix(stops, t) { // stops: [[pos, "#hex"], ...]
+    for (var i = 0; i < stops.length - 1; i++) {
+      if (t <= stops[i + 1][0]) {
+        var k = (t - stops[i][0]) / (stops[i + 1][0] - stops[i][0]);
+        var a = hex(stops[i][1]), b = hex(stops[i + 1][1]);
+        return [Math.round(lerp(a[0], b[0], k)), Math.round(lerp(a[1], b[1], k)), Math.round(lerp(a[2], b[2], k))];
+      }
+    }
+    return hex(stops[stops.length - 1][1]);
+  }
+  function rgb(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
+  function lum(c) { var v = c.map(function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; }
+
+  /* ---------------- Smooth scroll (Lenis) ---------------- */
+  var lenis = null;
+  if (motion && window.Lenis) {
+    lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      var el = id === "#top" ? document.body : document.querySelector(id);
+      if (!el) return;
+      closeSheet();
+      if (lenis) { e.preventDefault(); lenis.scrollTo(id === "#top" ? 0 : el, { duration: 1.4 }); }
+    });
+  });
+
+  /* ---------------- Nav: hide on scroll down, progress bar, rail ---------------- */
+  var nav = $("#nav"), bar = $("#progress"), lastY = 0, ticking = false;
+  function onScroll() {
+    var y = window.scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
+    if (y > 240 && y > lastY + 4 && !sheet.classList.contains("is-open")) nav.classList.add("is-hidden");
+    else if (y < lastY - 4 || y < 240) nav.classList.remove("is-hidden");
+    lastY = y; ticking = false;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+
+  var railLinks = $$("[data-rail]"), navLinks = $$("[data-nav]"), rail = $(".rail");
+  var railThemes = { dark: ["#A8A29E", "#D4A54A"], light: ["#57534E", "#A16207"], roast: ["#57534E", "#A16207"] };
+  function setActive(id, theme) {
+    railLinks.forEach(function (a) { a.classList.toggle("is-active", a.dataset.rail === id); });
+    navLinks.forEach(function (a) { a.classList.toggle("is-active", a.dataset.nav === id); });
+    var t = railThemes[theme] || railThemes.dark;
+    if (id !== "roast") { rail.style.setProperty("--rail-fg", t[0]); rail.style.setProperty("--rail-active", t[1]); }
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) setActive(en.target.dataset.chapter, en.target.dataset.railTheme); });
+  }, { rootMargin: "-50% 0px -50% 0px" });
+  $$("[data-chapter]").forEach(function (s) { io.observe(s); });
+
+  /* ---------------- Mobile sheet ---------------- */
+  var sheet = $("#sheet"), menuBtn = $("#menuBtn");
+  function closeSheet() {
+    if (!sheet.classList.contains("is-open")) return;
+    sheet.classList.remove("is-open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.setAttribute("aria-label", "Open menu");
+    menuBtn.querySelector("use").setAttribute("href", "#i-menu");
+  }
+  menuBtn.addEventListener("click", function () {
+    var open = !sheet.classList.contains("is-open");
+    sheet.classList.toggle("is-open", open); menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuBtn.querySelector("use").setAttribute("href", open ? "#i-x" : "#i-menu");
+    if (open) { nav.classList.remove("is-hidden"); sheet.querySelector("a").focus(); }
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeSheet(); menuBtn.focus(); } });
+
+  /* ---------------- Hero: floating bean field (canvas) ---------------- */
+  var bc = $("#beans"), bx = bc.getContext("2d"), beans = [], sprites = [], heroVisible = true, mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  function makeSprite(size, tones, blur) {
+    var pad = Math.ceil(blur * 3 + 4), c = document.createElement("canvas"), dpr = Math.min(2, window.devicePixelRatio || 1);
+    var w = (size * 1.6 + pad * 2), h = (size * 2.1 + pad * 2);
+    c.width = w * dpr; c.height = h * dpr;
+    var x = c.getContext("2d"); x.scale(dpr, dpr); x.translate(w / 2, h / 2);
+    if (blur) x.filter = "blur(" + blur + "px)";
+    var g = x.createRadialGradient(-size * 0.28, -size * 0.42, size * 0.08, 0, 0, size * 1.05);
+    g.addColorStop(0, tones[0]); g.addColorStop(0.5, tones[1]); g.addColorStop(1, tones[2]);
+    x.beginPath(); x.ellipse(0, 0, size * 0.7, size, 0, 0, Math.PI * 2); x.fillStyle = g; x.fill();
+    x.beginPath(); x.moveTo(-size * 0.04, -size * 0.86);
+    x.bezierCurveTo(size * 0.34, -size * 0.32, -size * 0.34, size * 0.3, size * 0.04, size * 0.86);
+    x.strokeStyle = "rgba(14,8,4,0.85)"; x.lineWidth = size * 0.09; x.lineCap = "round"; x.stroke();
+    x.beginPath(); x.moveTo(size * 0.03, -size * 0.84);
+    x.bezierCurveTo(size * 0.39, -size * 0.3, -size * 0.29, size * 0.32, size * 0.09, size * 0.84);
+    x.strokeStyle = "rgba(255,220,170,0.16)"; x.lineWidth = size * 0.025; x.stroke();
+    return { c: c, w: w, h: h };
+  }
+  function buildBeans() {
+    var W = bc.clientWidth, H = bc.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    bc.width = W * dpr; bc.height = H * dpr; bx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var tones = [["#9A6A44", "#5A3720", "#24150B"], ["#B07A4C", "#6B4226", "#2A180C"], ["#8A5A36", "#4A2C1A", "#1A0F07"]];
+    var scale = clamp(W / 1440, 0.55, 1.2);
+    sprites = [
+      makeSprite(16 * scale, tones[2], 3), makeSprite(20 * scale, tones[0], 2.2),
+      makeSprite(30 * scale, tones[1], 0.6), makeSprite(38 * scale, tones[0], 0),
+      makeSprite(62 * scale, tones[1], 0), makeSprite(90 * scale, tones[2], 6)
+    ];
+    beans = [];
+    var count = W < 700 ? 16 : 30;
+    for (var i = 0; i < count; i++) {
+      var s = i < count * 0.35 ? (i % 2) : i < count * 0.8 ? 2 + (i % 2) : (i % 3 === 0 ? 5 : 4);
+      var depth = [0.25, 0.35, 0.6, 0.7, 1, 1.4][s];
+      var xBias = Math.random() < 0.72 ? lerp(0.45, 1.02, Math.random()) : Math.random() * 0.45;
+      beans.push({ s: s, d: depth, x: xBias * W, y: Math.random() * H, r: Math.random() * Math.PI * 2, vr: (Math.random() - 0.5) * 0.004, vy: -(0.08 + Math.random() * 0.14) * depth, a: (s === 5 ? 0.55 : lerp(0.55, 1, depth / 1.4)) * (W < 700 ? 0.5 : 1) });
+    }
+    if (!motion) drawBeans();
+  }
+  function drawBeans() {
+    var W = bc.clientWidth, H = bc.clientHeight;
+    bx.clearRect(0, 0, W, H);
+    mouse.x += (mouse.tx - mouse.x) * 0.05; mouse.y += (mouse.ty - mouse.y) * 0.05;
+    var sy = window.scrollY;
+    for (var i = 0; i < beans.length; i++) {
+      var b = beans[i], sp = sprites[b.s];
+      if (motion) { b.y += b.vy; b.r += b.vr; if (b.y < -120) { b.y = H + 120; b.x = (Math.random() < 0.72 ? lerp(0.45, 1.02, Math.random()) : Math.random() * 0.45) * W; } }
+      var px = b.x + mouse.x * 24 * b.d, py = b.y + mouse.y * 18 * b.d - (motion ? sy * 0.25 * b.d : 0);
+      bx.save(); bx.globalAlpha = b.a; bx.translate(px, py); bx.rotate(b.r);
+      bx.drawImage(sp.c, -sp.w / 2, -sp.h / 2, sp.w, sp.h); bx.restore();
+    }
+  }
+  function loopBeans() { if (heroVisible && !document.hidden) drawBeans(); requestAnimationFrame(loopBeans); }
+  buildBeans();
+  if (motion) {
+    requestAnimationFrame(loopBeans);
+    new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; }).observe($(".hero"));
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", function (e) { mouse.tx = e.clientX / innerWidth - 0.5; mouse.ty = e.clientY / innerHeight - 0.5; }, { passive: true });
+    }
+  }
+
+  /* ---------------- Origin: contour map (canvas, draws on scroll) ---------------- */
+  var cc = $("#contours"), cx = cc.getContext("2d"), contourP = motion ? 0 : 1, rings = [];
+  (function seedRings() {
+    var rnd = (function (s) { return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; })(61);
+    function peak(px, py, n, r0, r1, base) {
+      var harm = [];
+      for (var h = 1; h <= 5; h++) harm.push([rnd() * 0.09 / h * 2, rnd() * Math.PI * 2]);
+      for (var i = 0; i < n; i++) rings.push({ px: px, py: py, r: lerp(r0, r1, i / (n - 1)), harm: harm, j: i * 0.37, idx: (n - i) % 4 === 0, elev: base - i * 50 });
+    }
+    peak(0.58, 0.42, 15, 0.04, 0.62, 2150);
+    peak(0.2, 0.8, 7, 0.03, 0.26, 1800);
+  })();
+  function drawContours() {
+    var W = cc.clientWidth, H = cc.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (!W) return;
+    if (cc.width !== Math.round(W * dpr)) { cc.width = Math.round(W * dpr); cc.height = Math.round(H * dpr); }
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, W, H);
+    var S = Math.min(W, H);
+    for (var k = 0; k < rings.length; k++) {
+      var g = rings[k], local = clamp(contourP * 1.6 - (k % 15) * 0.04, 0, 1);
+      if (local <= 0) continue;
+      cx.beginPath();
+      var steps = 140, end = Math.round(steps * local);
+      for (var i = 0; i <= end; i++) {
+        var th = (i / steps) * Math.PI * 2, rr = g.r;
+        for (var h = 0; h < g.harm.length; h++) rr *= 1 + g.harm[h][0] * Math.sin((h + 1) * th + g.harm[h][1] + g.j * 0.15);
+        var x = g.px * W + Math.cos(th) * rr * S, y = g.py * H + Math.sin(th) * rr * S * 0.92;
+        if (i === 0) cx.moveTo(x, y); else cx.lineTo(x, y);
+      }
+      cx.strokeStyle = g.idx ? "rgba(161,98,7,0.75)" : "rgba(87,83,78,0.28)";
+      cx.lineWidth = g.idx ? 1.4 : 1; cx.stroke();
+      if (g.idx && local >= 1 && g.elev > 1500) {
+        cx.font = "600 10px Montserrat, Arial, sans-serif"; cx.fillStyle = "#A16207";
+        var lx = g.px * W + g.r * S * 0.96, ly = g.py * H - 4;
+        if (lx < W - 30) cx.fillText(g.elev.toLocaleString("en-US"), lx, ly);
+      }
+    }
+    // farm marker
+    if (contourP > 0.6) {
+      var a = clamp((contourP - 0.6) / 0.3, 0, 1), mx = 0.58 * W, my = 0.42 * H;
+      cx.globalAlpha = a;
+      cx.beginPath(); cx.arc(mx, my, 18, 0, Math.PI * 2); cx.fillStyle = "rgba(161,98,7,0.15)"; cx.fill();
+      cx.beginPath(); cx.arc(mx, my, 6, 0, Math.PI * 2); cx.fillStyle = "#A16207"; cx.fill();
+      cx.font = "600 11px Montserrat, Arial, sans-serif"; cx.fillStyle = "#1C1917"; cx.fillText("GEDEB HALO · 2,150 m", mx + 16, my - 14);
+      cx.globalAlpha = 1;
+    }
+  }
+  drawContours();
+
+  /* ---------------- Products ---------------- */
+  var products = [
+    { name: "Gedeb Halo", origin: "Ethiopia · Washed · 2,150 m", notes: "Jasmine, bergamot, white peach", roast: 1, price: [24, 78], badge: "Score 88.5", bag: "#D9C08C", label: "#1C1917", bg: "radial-gradient(80% 80% at 50% 30%, #6B5A3A, #2B2620)" },
+    { name: "Kiambu AA", origin: "Kenya · Double washed · 1,850 m", notes: "Blackcurrant, grapefruit, cane sugar", roast: 2, price: [26, 84], badge: "Limited lot", bag: "#7A2E2E", label: "#F0DDB0", bg: "radial-gradient(80% 80% at 50% 30%, #5A3030, #241A18)" },
+    { name: "Huehue Highlands", origin: "Guatemala · Washed · 1,900 m", notes: "Toffee, orange zest, almond", roast: 3, price: [20, 64], badge: "Staff pick", bag: "#57534E", label: "#F5F0E8", bg: "radial-gradient(80% 80% at 50% 30%, #5A544E, #24201C)" },
+    { name: "No. 7 Espresso", origin: "Brazil · Colombia · Ethiopia", notes: "Dark chocolate, black cherry, brown sugar", roast: 4, price: [19, 60], badge: "Since 1974", bag: "#0C0A09", label: "#D4A54A", bg: "radial-gradient(80% 80% at 50% 30%, #6B4A2E, #2A1A10)" }
+  ];
+  function bagSVG(p) {
+    return '<svg viewBox="0 0 160 200" aria-hidden="true">' +
+      '<path d="M30 30 L130 30 L140 190 Q80 198 20 190 Z" fill="' + p.bag + '"/>' +
+      '<path d="M30 30 L130 30 L131 46 L29 46 Z" fill="rgba(0,0,0,0.25)"/>' +
+      '<path d="M26 14 h108 l-4 18 h-100 z" fill="' + p.bag + '" stroke="rgba(0,0,0,0.25)"/>' +
+      '<path d="M34 22 h92" stroke="rgba(255,255,255,0.25)" stroke-dasharray="3 4"/>' +
+      '<rect x="44" y="76" width="72" height="84" rx="4" fill="' + p.label + '"/>' +
+      '<ellipse cx="80" cy="98" rx="7" ry="10" transform="rotate(28 80 98)" fill="none" stroke="' + p.bag + '" stroke-width="2"/>' +
+      '<text x="80" y="128" text-anchor="middle" font-family="Cormorant, Georgia, serif" font-size="13" font-weight="600" letter-spacing="2" fill="' + p.bag + '">HALVARD</text>' +
+      '<path d="M56 138 h48" stroke="' + p.bag + '" stroke-opacity="0.5"/>' +
+      '<text x="80" y="151" text-anchor="middle" font-family="Montserrat, Arial" font-size="6.5" font-weight="600" letter-spacing="1" fill="' + p.bag + '">' + p.name.toUpperCase() + '</text>' +
+      '<path d="M30 46 L22 188" stroke="rgba(255,255,255,0.08)" stroke-width="6"/>' +
+      '</svg>';
+  }
+  var grid = $("#products");
+  products.forEach(function (p, i) {
+    var el = document.createElement("article");
+    el.className = "pcard"; el.setAttribute("data-card", "");
+    var dots = ""; for (var d = 1; d <= 5; d++) dots += '<i class="' + (d <= p.roast + (p.roast === 4 ? 1 : 0) ? "on" : "") + '"></i>';
+    var lvl = ["", "Light", "Medium-light", "Medium", "Dark"][p.roast];
+    el.innerHTML =
+      '<div class="pack" style="--pack-bg:' + p.bg + '"><span class="badge">' + p.badge + '</span>' + bagSVG(p) + '</div>' +
+      '<div><h3>' + p.name + '</h3><p class="origin-line">' + p.origin + '</p></div>' +
+      '<p class="tnotes">' + p.notes + '</p>' +
+      '<div class="roastlvl"><span class="dots" aria-hidden="true">' + dots + '</span><span>' + lvl + ' roast</span></div>' +
+      '<div class="sizes" role="group" aria-label="Bag size for ' + p.name + '">' +
+        '<button type="button" aria-pressed="true" data-size="0">250 g</button><button type="button" aria-pressed="false" data-size="1">1 kg</button></div>' +
+      '<div class="buy"><span class="price num" data-price>$' + p.price[0] + '</span>' +
+        '<button class="add" type="button" data-add="' + i + '"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span>Add to bag</span></button></div>';
+    grid.appendChild(el);
+    el._size = 0;
+  });
+
+  grid.addEventListener("click", function (e) {
+    var card = e.target.closest(".pcard"); if (!card) return;
+    var idx = Array.prototype.indexOf.call(grid.children, card), p = products[idx];
+    var sizeBtn = e.target.closest("[data-size]");
+    if (sizeBtn) {
+      var s = +sizeBtn.dataset.size; if (s === card._size) return;
+      card._size = s;
+      $$("[data-size]", card).forEach(function (b) { b.setAttribute("aria-pressed", String(b === sizeBtn)); });
+      var price = $("[data-price]", card);
+      price.classList.add("swap");
+      clearTimeout(card._pt);
+      card._pt = setTimeout(function () { price.textContent = "$" + p.price[s]; price.classList.remove("swap"); }, 180);
+      return;
+    }
+    var add = e.target.closest("[data-add]");
+    if (add) addToBag(add, p.name + ", " + (card._size ? "1 kg" : "250 g"));
+  });
+
+  /* Card glare + subtle tilt (fine pointers only) */
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reduce) {
+    $$(".pcard").forEach(function (c) {
+      c.addEventListener("pointermove", function (e) {
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        c.style.setProperty("--mx", x * 100 + "%"); c.style.setProperty("--my", y * 100 + "%");
+        c.style.transform = "perspective(900px) rotateX(" + ((0.5 - y) * 5).toFixed(2) + "deg) rotateY(" + ((x - 0.5) * 6).toFixed(2) + "deg) translateY(-4px)";
+      });
+      c.addEventListener("pointerleave", function () { c.style.transform = ""; });
+    });
+  }
+
+  /* ---------------- Bag + toast ---------------- */
+  var bagN = 0, bagCount = $("#bagCount"), bagBtn = $("#bagBtn"), toast = $("#toast"), toastText = $("#toastText"), tt;
+  function showToast(msg) {
+    toastText.textContent = msg; toast.classList.add("show");
+    clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("show"); }, 2600);
+  }
+  function addToBag(btn, label) {
+    bagN++; bagCount.textContent = bagN; bagCount.classList.add("has");
+    bagBtn.setAttribute("aria-label", "Bag, " + bagN + (bagN === 1 ? " item" : " items"));
+    if (motion) gsap.fromTo(bagBtn, { scale: 1 }, { scale: 1.15, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" });
+    var span = btn.querySelector("span"), use = btn.querySelector("use");
+    btn.classList.add("added"); span.textContent = "Added"; use.setAttribute("href", "#i-check");
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { btn.classList.remove("added"); span.textContent = "Add to bag"; use.setAttribute("href", "#i-plus"); }, 1800);
+    showToast("Added " + label + " to your bag");
+    nav.classList.remove("is-hidden");
+  }
+  bagBtn.addEventListener("click", function () {
+    showToast(bagN ? "Your bag has " + bagN + (bagN === 1 ? " item" : " items") + ". Checkout isn't part of this demo." : "Your bag is empty. Pick a coffee in Chapter III.");
+  });
+
+  /* ---------------- Subscribe form ---------------- */
+  var form = $("#subForm"), email = $("#email"), err = $("#email-err");
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  email.addEventListener("blur", function () { if (email.value && !validEmail(email.value.trim())) setErr("Enter an email address like name@example.com."); });
+  email.addEventListener("input", function () { if (email.getAttribute("aria-invalid") === "true" && validEmail(email.value.trim())) setErr(""); });
+  function setErr(m) { err.textContent = m; email.setAttribute("aria-invalid", m ? "true" : "false"); }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = email.value.trim();
+    if (!v) { setErr("Enter your email address to start."); email.focus(); return; }
+    if (!validEmail(v)) { setErr("That email looks incomplete. Check for a missing @ or domain."); email.focus(); return; }
+    setErr("");
+    $("#successText").textContent = "Thanks. We'd roast your first bag of " + $("#brew").value.toLowerCase().replace(": surprise me", "") + " coffee on Monday. This is a design demo, so nothing was sent to " + v + ".";
+    $("#success").classList.add("show");
+  });
+
+  /* ---------------- Roast chapter model ---------------- */
+  var K = 2.05, DROP_S = 723;
+  function tempAt(p) { return 24 + 185 * (1 - Math.exp(-K * p)) / (1 - Math.exp(-K)); }
+  var beanStops = [[24, "#7D8A55"], [110, "#9A9A60"], [150, "#C8A85E"], [175, "#A9773F"], [196, "#7A4A2A"], [209, "#4A2C1A"]];
+  var creaseStops = [[24, "#3B4A2A"], [150, "#7A6430"], [196, "#3A2214"], [209, "#1E120A"]];
+  var bgStops = [[0, "#F5F0E8"], [0.45, "#D9CBB4"], [0.7, "#5A4030"], [1, "#1C1917"]];
+  function tStop(stops, t) { var s = stops.map(function (x) { return [(x[0] - 24) / 185, x[1]]; }); return mix(s, (t - 24) / 185); }
+  var roastEl = $("#roast"), beanBody = $("#beanBody"), beanCrease = $("#beanCrease"), beanSvg = $("#bean"), glow = $("#beanGlow");
+  var tempVal = $("#tempVal"), timeVal = $("#timeVal"), lossVal = $("#lossVal"), marker = $("#roastMarker"), stageEls = $$("#stages li"), chips = $("#chips");
+  var lastTemp = 0;
+  function mmss(s) { s = Math.round(s); return (s < 600 ? "0" : "") + Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+  function crack() {
+    if (!motion) return;
+    for (var i = 0; i < 16; i++) {
+      var c = document.createElement("i"); chips.appendChild(c);
+      var ang = Math.random() * Math.PI * 2, dist = 90 + Math.random() * 120;
+      gsap.fromTo(c, { x: 0, y: 0, opacity: 1, rotate: 0, scale: 0.6 + Math.random() },
+        { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist, rotate: Math.random() * 360, opacity: 0, duration: 0.9 + Math.random() * 0.5, ease: "expo.out", onComplete: function () { this.targets()[0].remove(); } });
+    }
+    gsap.fromTo(beanSvg, { x: -3 }, { x: 0, duration: 0.4, ease: "elastic.out(1, 0.3)" });
+  }
+  function renderRoast(p) {
+    var t = tempAt(p);
+    var bg = mix(bgStops, p), dark = lum(bg) < 0.18;
+    roastEl.style.setProperty("--rbg", rgb(bg));
+    roastEl.style.setProperty("--rfg", dark ? "#FAFAF9" : "#0C0A09");
+    roastEl.style.setProperty("--rmute", dark ? "#C9C2BA" : "#4A4540");
+    roastEl.style.setProperty("--racc", dark ? "#D4A54A" : (lum(bg) < 0.45 ? "#7A4A07" : "#A16207"));
+    rail.style.setProperty("--rail-fg", dark ? "#A8A29E" : "#57534E");
+    rail.style.setProperty("--rail-active", dark ? "#D4A54A" : "#7A4A07");
+    beanBody.setAttribute("fill", rgb(tStop(beanStops, t)));
+    beanCrease.setAttribute("stroke", rgb(tStop(creaseStops, t)));
+    beanSvg.style.transform = "scale(" + (0.86 + 0.2 * p).toFixed(3) + ") rotate(" + (p * 20).toFixed(2) + "deg)";
+    glow.style.setProperty("--glow", "rgba(212,165,74," + (0.12 + 0.3 * p).toFixed(2) + ")");
+    tempVal.textContent = Math.round(t);
+    timeVal.textContent = mmss(p * DROP_S);
+    lossVal.textContent = (15.2 * Math.pow(p, 1.4)).toFixed(1) + "%";
+    marker.style.left = (p * 100) + "%";
+    var activeSet = false;
+    for (var i = stageEls.length - 1; i >= 0; i--) {
+      var at = +stageEls[i].dataset.at, reached = t >= at - 0.5;
+      stageEls[i].classList.toggle("done", reached && activeSet);
+      stageEls[i].classList.toggle("active", reached && !activeSet);
+      if (reached) activeSet = true;
+    }
+    if (lastTemp < 196 && t >= 196) crack();
+    lastTemp = t;
+  }
+
+  /* ---------------- Counters ---------------- */
+  function countUp(el) {
+    var target = +el.dataset.count, o = { v: 0 };
+    gsap.to(o, { v: target, duration: 1.8, ease: "expo.out", onUpdate: function () { el.textContent = Math.round(o.v).toLocaleString("en-US"); } });
+  }
+
+  /* ==========================================================================
+     GSAP choreography (skipped entirely under reduced motion: final states render)
+     ========================================================================== */
+  if (!motion) { renderRoast(1); root.classList.add("no-pin"); return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+  var hasSplit = !!window.SplitText;
+  if (hasSplit) gsap.registerPlugin(SplitText);
+  gsap.defaults({ ease: "expo.out", duration: 1 });
+
+  // 1. Page-load sequence
+  var heroTitle = $("[data-hero-title]");
+  var intro = gsap.timeline({ delay: 0.15 });
+  intro.from(nav, { y: -40, opacity: 0, duration: 1.1 }, 0)
+       .from(bc, { opacity: 0, duration: 2.2, ease: "power2.out" }, 0)
+       .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 1.1, stagger: 0.09 }, 0.55);
+  if (hasSplit) {
+    SplitText.create(heroTitle, {
+      type: "chars,words", autoSplit: true,
+      onSplit: function (self) {
+        return intro.from(self.chars, { yPercent: 70, rotateX: -60, opacity: 0, duration: 1.1, stagger: 0.022, transformOrigin: "50% 100%" }, 0.2);
+      }
+    });
+  } else {
+    intro.from(heroTitle, { y: 40, opacity: 0, duration: 1.2 }, 0.2);
+  }
+
+  // 2. Hero scroll-out: content drifts and fades as the next chapter arrives (subtle parallax)
+  gsap.to("#heroContent", { yPercent: -12, opacity: 0.25, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // 3. Marquee: continuous, speeds up and reverses with scroll velocity
+  var mq = gsap.to("#marquee", { xPercent: -50, repeat: -1, duration: 38, ease: "none" });
+  var mqDir = 1;
+  ScrollTrigger.create({
+    trigger: ".marquee", start: "top bottom", end: "bottom top",
+    onUpdate: function (self) {
+      var v = self.getVelocity();
+      if (Math.abs(v) > 20) mqDir = v > 0 ? 1 : -1;
+      gsap.to(mq, { timeScale: mqDir * clamp(1 + Math.abs(v) / 400, 1, 5), duration: 0.4, overwrite: true });
+    },
+    onToggle: function (self) { self.isActive ? mq.play() : mq.pause(); }
+  });
+
+  // 4. Headline line reveals
+  if (hasSplit) {
+    $$("[data-split]").forEach(function (el) {
+      SplitText.create(el, {
+        type: "lines", mask: "lines", autoSplit: true, linesClass: "sl",
+        onSplit: function (self) {
+          (self.masks || []).forEach(function (m) { m.style.paddingBottom = "0.12em"; m.style.marginBottom = "-0.12em"; });
+          return gsap.from(self.lines, { yPercent: 110, duration: 1.2, stagger: 0.09, scrollTrigger: { trigger: el, start: "top 85%", once: true } });
+        }
+      });
+    });
+  }
+
+  // 5. Generic staggered reveals, batched so siblings arrive 40ms apart
+  gsap.set("[data-reveal]", { opacity: 0, y: 48 });
+  ScrollTrigger.batch("[data-reveal]", {
+    start: "top 88%", once: true,
+    onEnter: function (els) { gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.04, overwrite: true }); }
+  });
+
+  // 6. Stat counters
+  $$("[data-count]").forEach(function (el) {
+    el.textContent = "0";
+    ScrollTrigger.create({ trigger: el, start: "top 90%", once: true, onEnter: function () { countUp(el); } });
+  });
+
+  // 7. Contour map draws itself as it scrolls through view
+  ScrollTrigger.create({
+    trigger: ".mapcard", start: "top 85%", end: "bottom 45%", scrub: 0.6,
+    onUpdate: function (self) { contourP = self.progress; drawContours(); }
+  });
+  window.addEventListener("resize", function () { drawContours(); });
+
+  var mm = gsap.matchMedia();
+
+  // 8. Origins: pinned horizontal scroll on desktop, native swipe on small screens
+  mm.add("(min-width: 900px)", function () {
+    root.classList.remove("no-pin");
+    var track = $("#track");
+    function dist() { return Math.max(0, track.scrollWidth - window.innerWidth); }
+    var tween = gsap.to(track, {
+      x: function () { return -dist(); }, ease: "none",
+      scrollTrigger: { trigger: "#origins-gallery", start: "top top", end: function () { return "+=" + dist(); }, pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 }
+    });
+    $$(".ocard").forEach(function (card) {
+      gsap.from(card.querySelector("h3"), { yPercent: 40, opacity: 0, duration: 1, scrollTrigger: { trigger: card, containerAnimation: tween, start: "left 85%", once: true } });
+    });
+    return function () { gsap.set(track, { x: 0 }); };
+  });
+  mm.add("(max-width: 899px)", function () { root.classList.add("no-pin"); });
+
+  // 9. The Roast: pinned, scrubbed. The page itself roasts from cream to espresso.
+  renderRoast(0);
+  mm.add({ isSmall: "(max-width: 640px)", isBig: "(min-width: 641px)" }, function (ctx) {
+    ScrollTrigger.create({
+      trigger: "#roast", start: "top top", end: ctx.conditions.isSmall ? "+=180%" : "+=260%",
+      pin: "#roastStage", scrub: 1, anticipatePin: 1,
+      onUpdate: function (self) { renderRoast(self.progress); }
+    });
+  });
+
+  // 10. Product cards: staggered rise
+  gsap.from(".pcard", { y: 80, opacity: 0, duration: 1.2, stagger: 0.05, scrollTrigger: { trigger: "#products", start: "top 85%", once: true } });
+
+  // 11. Footer wordmark parallax
+  gsap.fromTo(".bigword", { yPercent: 40, letterSpacing: "0.12em" }, { yPercent: 0, letterSpacing: "0.02em", ease: "none", scrollTrigger: { trigger: "footer", start: "top bottom", end: "bottom bottom", scrub: true } });
+
+  // Rebuild canvases after fonts load and on resize
+  var rt;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(buildBeans, 200); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
